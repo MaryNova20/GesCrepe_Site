@@ -1,0 +1,186 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form>
+        <p:growl id="gl" showDetail="true" showSummary="true" />  
+        <center>
+             <br> </br>
+            <!--p style="alignment-adjust: central">RAD DU FORMULAIRE DEMANDE</p-->
+            <div >
+                <p:panel style="width: 800px" header="Gestion des demandes">
+                    <p:fieldset toggleable="true" legend="edition">
+                        <h:panelGrid  columns="2">
+    
+  <p:outputLabel  value="Demandeur:" for="demandeur" />
+  <p:selectOneMenu converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" converterMessage="Conversion echoue" id="demandeur" value="#{demandeMBean.formObject.matricule }" title="demandeur" >
+                       <f:selectItem itemLabel="" itemValue=""/>
+                       <f:selectItems var="itemdemandeur" value="#{demandeMBean.dataListEmploye}" itemValue="#{itemdemandeur}" itemLabel="#{itemdemandeur.nom} #{itemdemandeur.prenom}"/>
+</p:selectOneMenu> 
+  
+  
+  <p:outputLabel  value="Matricule:" for="matricule" />
+<p:selectOneMenu converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" converterMessage="Conversion echoue" id="matricule" value="#{demandeMBean.formObject.matricule}" title="matricule" >
+                       <f:selectItem itemLabel="" itemValue=""/>
+                       <f:selectItems var="itemmatricule" value="#{demandeMBean.dataListEmploye}" itemValue="#{itemmatricule}" itemLabel="#{itemmatricule.matricule}"/>
+</p:selectOneMenu>
+  
+ 
+  <p:outputLabel  value="Nature du crédit:" for="nature" />
+  <p:selectOneMenu converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" converterMessage="Conversion echoue" id="nature" value="#{demandeMBean.formObject.idType}" title="nature" >
+                       <f:selectItem itemLabel="" itemValue=""/>
+                       <f:selectItems var="itemnature" value="#{demandeMBean.dataListTypecredit}" itemValue="#{itemtype}" itemLabel="#{itemnature.nature}"/>
+</p:selectOneMenu>
+  <p:outputLabel  value="Garantie:" for="libgarantie" />
+  <p:selectOneMenu converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" converterMessage="Conversion echoue" id="libgarantie" value="#{garantieMBean.formObject.idGarantie}" title="libgarantie" >
+                       <f:selectItem itemLabel="" itemValue=""/>
+                       <f:selectItems var="itemlibgarantie" value="#{demandeMBean.dataListGarantie}" itemValue="#{itemgarantie}" itemLabel="#{itemlibgarantie.libGarantie}"/>
+</p:selectOneMenu> 
+  
+  <p:outputLabel  value="Date de la demande:" for="datedemande" />
+  <p:calendar showOn="button" pattern="dd/MM/yy"   id="datedemande" value="#{demandeMBean.formObject.dateDemande}" title="datedemande" required="false" requiredMessage="la date de demande est requise."/>
+                          
+  <p:outputLabel  value="Montant cessible:" for="montantcessible" />
+  <p:inputText   id="montantcessible" value="#{demandeMBean.formObject.montantCessible}" title="montantcessible" required="false" requiredMessage="le montant cessible est requis."/>
+                          
+  <p:outputLabel  value="Quotite cessible:" for="quotitecessible" />
+  <p:inputText   id="quotitecessible" value="#{demandeMBean.formObject.quotiteCessible}" title="quotitecessible" required="false" requiredMessage="la quotité cessible est requise."/>
+                          
+  <p:outputLabel  value="Quotite atteinte:" for="quotiteatteinte" />
+  <p:inputText   id="quotiteatteinte" value="#{demandeMBean.formObject.quotiteAtteinte}" title="quotiteatteinte" required="false" requiredMessage="la quotité atteinte est requise."/>
+                          
+  <p:outputLabel  value="Appreciation:" for="appreciation" />
+  <p:inputText   id="appreciation" value="#{demandeMBean.formObject.appreciation}" title="appreciation" required="false" requiredMessage="l'appréciation est requise."/>
+                          
+  <p:outputLabel  value="Décision:" for="decision" />
+  <p:inputText   id="decision" value="#{demandeMBean.formObject.decision}" title="decision" required="false" requiredMessage="la décision est requise."/>
+                          
+  <p:outputLabel  value="Commentaire:" for="commentaire" />
+  <p:inputText   id="commentaire" value="#{demandeMBean.formObject.commentaire}" title="commentaire" required="false" requiredMessage="le commentaire est requis."/>
+                          
+</h:panelGrid>
+
+     </p:fieldset>
+
+
+                    <div class="boutondiv">
+                        <p:commandButton  update="@form"  value="Valider" actionListener="#{demandeMBean.enregistrer()}" icon="ui-icon-check"/>
+                        <p:commandButton disabled="#{demandeMBean.desactiverBoutonSuppr}" update="@form" actionListener="#{demandeMBean.confirmeSuppression()}" value="Supprimer" icon="ui-icon-trash"/>
+                        <p:commandButton value="Imprimer" icon="ui-icon-print"/>
+                    </div>
+                    <div style="margin-top: 10px" class="ftitle">
+                        <h:outputLabel value="Liste des demandes"/>
+                    </div>
+                    <div >
+                        <p:dataTable paginatorPosition="top" paginatorAlwaysVisible="false" paginator="true" reflow="true" rows="5" id="dta" rowKey="#{itemListdemande.idDemande}" selectionMode="single" selection="#{demandeMBean.selectedObject}" styleClass="datatable" value="#{demandeMBean.dataList}" var="itemListdemande">
+                            <p:ajax event="rowDblselect" update="@form" listener="#{demandeMBean.rowSelect()}"/>
+                          
+                            <p:column filterBy="#{itemListdemande.idGarantie.libGarantie}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Garantie"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListdemande.idGarantie.libGarantie}"/>
+                            </p:column>
+                            
+                            <p:column filterBy="#{itemListdemande.idType.nature}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Type du prêt"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListdemande.idType.nature}"/>
+                            </p:column>
+                            
+                            <p:column filterBy="#{itemListdemande.matricule}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Matricule"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListdemande.matricule}"/>
+                            </p:column>
+                            
+                            <p:column filterBy="#{itemListdemande.dateDemande}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="date de demande"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListdemande.dateDemande}"/>
+                            </p:column>
+                            
+                            <p:column filterBy="#{itemListdemande.montantCessible}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="montant cessible"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListdemande.montantCessible}"/>
+                            </p:column>
+                            
+                            <p:column filterBy="#{itemListdemande.quotiteCessible}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="quotité cessible"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListdemande.quotiteCessible}"/>
+                            </p:column>
+                            
+                            <p:column filterBy="#{itemListdemande.quotiteAtteinte}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="quotité atteinte"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListdemande.quotiteAtteinte}"/>
+                            </p:column>
+                            
+                             <p:column filterBy="#{itemListdemande.appreciation}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="appréciation"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListdemande.appreciation}"/>
+                            </p:column>
+                            
+                            <p:column filterBy="#{itemListdemande.decision}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="décision"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListdemande.decision}"/>
+                            </p:column>
+                            
+                            <p:column filterBy="#{itemListdemande.commentaire}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="commentaire"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListdemande.commentaire}"/>
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:outputLabel  value="RAD(Rapid Application developpment) powered by MENSAH Y.O.D"/>
+                            </f:facet>
+                        </p:dataTable>
+                        <div class="boutondiv">
+                            <p:commandButton  process="@this"  update="@form" actionListener="#{demandeMBean.rafraichir()}" value="Rafraichir" icon="ui-icon-refresh"/>
+                        </div>
+
+                    </div>
+
+                </p:panel>
+            </div>
+        </center>
+        <p:confirmDialog   styleClass="confirmDiaolog" message="etes-vous sure de vouloir effectuer la suppression?" closable="false" hideEffect="bounce"
+                           widgetVar="confirmSuppression" >
+            <div class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{demandeMBean.supprimer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:confirmDialog>
+
+        <!--dialog de demande de confirmation d'enregistrement au cas ou il en faut-->
+
+        <p:dialog modal="true"  styleClass="confirmDiaolog" closable="flase" resizable="false" 
+                  widgetVar="confirmEnregistre" >
+            <p:outputLabel value="etes-vous sure de vouloir valider ces informations ?"/><br/>
+            <div  class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{demandeMBean.enregistrer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:dialog>
+
+    </h:form>
+ </ui:composition>
+

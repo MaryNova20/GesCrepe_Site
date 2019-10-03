@@ -1,0 +1,54 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    <h:form>
+    <div id="layout-topbar" class="ShadowGray">
+    	<div id="layout-topbar-indent">
+        	<a href="http://localhost:8080/GesCREPE/faces/pages/dashboard.xhtml"><h:graphicImage name="images/bia.png" styleClass="Fleft" style="width: 5%;height: 70px;margin-top: 5px" 
+                                     library="spark-layout" id="logo" class="Fleft"/></a>
+            <a href="#" id="mobile-menu-button" class="BordRad3 white ShowOnMobile"><i class="fa fa-bars"></i> Menu</a>
+            <a href="#" id="mobile-menu-button-gray" class="BordRad3 white ShowOnMobile"><i class="fa fa-caret-down"></i> Top Menu</a>
+            
+            <ul id="layout-topbar-menu">
+            	<li>
+                    <h:commandLink value="Deconnexion" action="#{loginManagedBean.deconnexionuser()}" class="fa fa-sign-out"></h:commandLink>
+                </li>
+                
+             <li class="fa fa-ellipsis-v menu-separator"></li>
+            	<li>
+                    <p:commandButton value="Changer Mot de passe" actionListener="#{loginManagedBean.dialogchangerpasword()}" />
+                </li>
+                <li class="fa fa-ellipsis-v menu-separator"></li>
+                <li>
+                    <a class="Animated05 CursPointer"><i class="fa fa-user"></i> #{loginManagedBean.connectutilisateur.nomuser}, Bienvenue <i class="fa fa-chevron-down Fs14 Fright ShowOnMobile"></i></a>
+               
+                </li>
+            </ul>
+        </div>
+    </div>
+       <p:dialog modal="true" id="dial" header="Changer de mot passe"  widgetVar="confirmEnregistrech" >  
+     
+            <p:growl id="growlapp"  showDetail="true" showSummary="false"  life="2000" />
+
+            <h:panelGrid columns="2" cellpadding="5">  
+                <h:outputLabel value="Entrer le nouveau mot de passe" />  
+                <p:password  styleClass="inputMoyen" value="#{loginManagedBean.nouveauMotPasse}"   />  
+
+                <h:outputLabel value="Confirmer le mot de passe" />  
+                <p:password  value="#{loginManagedBean.confirmerMotPasse}"    styleClass="inputMoyen"/>  
+
+            </h:panelGrid>  
+            <div class="boutondiv">
+                <p:commandButton update="@form"  id="valider" action="#{loginManagedBean.changerMotPasse()}" onclick="PF('confirmEnregistrech').hide();" value="Valider" />
+                <p:commandButton  value="Annuler" process="@this" oncomplete="PF('confirmEnregistrech').hide()" />
+
+            </div>
+   
+       </p:dialog>
+
+    </h:form>
+   
+</ui:composition>

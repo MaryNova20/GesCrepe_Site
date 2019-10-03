@@ -1,0 +1,94 @@
+ <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form>
+        <p:growl id="gl" showDetail="true" showSummary="true" />  
+        <center>
+            <br> </br>
+            <!--p style="alignment-adjust: central">RAD DU FORMULAIRE ENCOURS</p-->
+            <div >
+                <p:panel style="width: 800px" header="Gestion des encours">
+                    <p:fieldset toggleable="true" legend="edition">
+                        <h:panelGrid  columns="2">
+                      
+  <p:outputLabel  value="matricule:" for="matricule" />
+<p:selectOneMenu converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" converterMessage="Conversion échouée" id="matricule" value="#{encoursMBean.formObject.matricule}" title="matricule" >
+                       <f:selectItem itemLabel="" itemValue=""/>
+                       <f:selectItems var="itemmatricule" value="#{encoursMBean.dataListEmploye}" itemValue="#{itemmatricule}" itemLabel="#{itemmatricule.matricule}"/>
+</p:selectOneMenu>
+  
+                         
+  <p:outputLabel  value="Employé:" for="employe" />
+  <p:inputText   id="employe" value="" title="employe" required="false" requiredMessage=""/>
+   
+  <p:outputLabel  value="numcredit:" for="numcredit" />
+                            <p:inputText   id="numcredit" value="#{encoursMBean.formObject.numCredit}" title="numcredit" required="false" requiredMessage="le(a) numcredit est requis(e)."/>
+                          
+  <p:outputLabel  value="objet:" for="objet" />
+                            <p:inputText   id="objet" value="#{encoursMBean.formObject.objet}" title="objet" required="false" requiredMessage="le(a) objet est requis(e)."/>
+                          
+  <p:outputLabel  value="montantoctroye:" for="montantoctroye" />
+                            <p:inputText   id="montantoctroye" value="#{encoursMBean.formObject.montantOctroye}" title="montantoctroye" required="false" requiredMessage="le(a) montantoctroye est requis(e)."/>
+                          
+  <p:outputLabel  value="reste:" for="reste" />
+                            <p:inputText   id="reste" value="#{encoursMBean.formObject.reste}" title="reste" required="false" requiredMessage="le(a) reste est requis(e)."/>
+                          
+  <p:outputLabel  value="mensualite:" for="mensualite" />
+                            <p:inputText   id="mensualite" value="#{encoursMBean.formObject.mensualite}" title="mensualite" required="false" requiredMessage="le(a) mensualite est requis(e)."/>
+                          
+  <p:outputLabel  value="datecomptable:" for="datecomptable" />
+                            <p:inputText   id="datecomptable" value="#{encoursMBean.formObject.dateComptable}" title="datecomptable" required="false" requiredMessage="le(a) datecomptable est requis(e)."/>
+                          
+</h:panelGrid>
+
+                    </p:fieldset>
+
+
+                    <div class="boutondiv">
+                        <p:commandButton  update="@form"  value="Valider" actionListener="#{encoursMBean.enregistrer()}" icon="ui-icon-check"/>
+                        <p:commandButton disabled="#{encoursMBean.desactiverBoutonSuppr}" update="@form" actionListener="#{encoursMBean.confirmeSuppression()}" value="Supprimer" icon="ui-icon-trash"/>
+                        <p:commandButton value="Imprimer" icon="ui-icon-print"/>
+                    </div>
+                    <div style="margin-top: 10px" class="ftitle">
+                        <h:outputLabel value="Liste des encours"/>
+                    </div>
+                    <div>
+             
+                        <div class="boutondiv">
+                            <p:commandButton  process="@this"  update="@form" actionListener="#{encoursMBean.rafraichir()}" value="Rafraichir" icon="ui-icon-refresh"/>
+
+                        </div>
+
+                    </div>
+
+                </p:panel>
+            </div>
+        </center>
+        <p:confirmDialog   styleClass="confirmDiaolog" message="etes-vous sure de vouloir effectuer la suppression?" closable="false" hideEffect="bounce"
+                           widgetVar="confirmSuppression" >
+            <div class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{encoursMBean.supprimer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:confirmDialog>
+
+        <!--dialog de demande de confirmation d'enregistrement au cas ou il en faut-->
+
+        <p:dialog modal="true"  styleClass="confirmDiaolog" closable="flase" resizable="false" 
+                  widgetVar="confirmEnregistre" >
+            <p:outputLabel value="etes-vous sure de vouloir valider ces informations ?"/><br/>
+            <div  class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{encoursMBean.enregistrer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:dialog>
+
+    </h:form>
+ </ui:composition>
+

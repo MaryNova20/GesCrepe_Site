@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                 template="./../../WEB-INF/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:bnu="http://bootsfaces.net/ui">
+
+    <ui:define name="content">
+        <h:form id="droit">
+            <p:growl id="growldroit"  showDetail="true" showSummary="false" autoUpdate="true" life="5000" />
+
+            <p:panel style="height: 520px" header="OCTROIE DE DROIT AUX UTILISATEURS">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="PROFIL :"/>
+                    <p:selectOneMenu value="#{octroieDroitBean.formprofilMenuitem.profilId}" var="profil"  converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" converterMessage="Conversion echoué">
+                        <p:ajax update="@form"  listener="#{octroieDroitBean.remplir()}"  />         
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItems value="#{employeManagedBean.dataListProfil}" var="item" itemLabel="#{item.profilDesc}" itemValue="#{item}"/>
+                        <p:column>
+                            <h:outputText value="#{profil.profilDesc}"/>
+                        </p:column>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+               
+                <table>
+                    <tr>
+                        <td valign="top">
+
+
+                        <p:panel  id="grap" header="LISTE DES DROITS NON AFFECTES">
+                            <p:dataTable id="grid1" value="#{octroieDroitBean.datalistenonaffecte}"
+                                         selection="#{octroieDroitBean.selMenuItem}"
+                                         rowKey="#{itemnonaffecte.menuItemId}" var="itemnonaffecte"
+                                         scrollable="true" scrollHeight="290">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Menu"/>
+                                    </f:facet>
+                                    <h:outputText value="#{itemnonaffecte.menuId.menuDesc}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Sous-menu"/>
+                                    </f:facet>
+                                    <h:outputText value="#{itemnonaffecte.menuItemDesc}"/>
+                                </p:column>
+                                <p:column selectionMode="multiple" style="width:10%;text-align:center"/>
+
+                            </p:dataTable>
+                            <div class="boutondiv">
+                                <p:commandButton id="traite" update="@form"  
+                                                 actionListener="#{octroieDroitBean.traitement()}"
+                                                 value="Attribuer le droits spécifiés" 
+                                                 icon="ui-icon-plus"/>
+                            </div>
+                        </p:panel>
+                    
+                        <p:blockUI  block="grap" trigger="@form:traite" >
+                            Affectation en cours...<br/>
+                            <p:graphicImage library="images" value="/resources/images/ajax-loader.gif"/>
+                        </p:blockUI>
+                        </td>
+                           <td valign="top">
+                        <p:panel header="LISTE DES DROITS ACTIFS">
+                            <p:dataTable id="grid2"
+                                         selectionMode="single"
+                                         selection="#{octroieDroitBean.selprofilMenuitem}"
+                                         rowKey="#{item.iddroit}"
+                                         value="#{octroieDroitBean.datalistdejaaffecte}"
+                                         scrollable="true" scrollHeight="320" var="item">
+                                <p:ajax event="rowSelect" listener="#{octroieDroitBean.rowselect()}" 
+                                        oncomplete="PF('desac').show()"
+                                        update="@form:dial"/>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Droits"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.menuItemId.menuItemDesc}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Statut"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.active}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                           </td>
+                        <p:dialog resizable="false" modal="true" id="dial" widgetVar="desac" hideEffect="drop" header="Actions" height="120" width="230" >
+                            <p:panel>
+                                <h:outputLabel value="DESACTIVER? / ACTIVER? " />
+                            </p:panel>
+                            <div class="boutondiv">
+                                <p:commandButton actionListener="#{octroieDroitBean.valider()}" icon="#{octroieDroitBean.iconbouton}" value="#{octroieDroitBean.libellebouton}" update="@form"/>
+                                <p:commandButton  update="@form" actionListener="#{octroieDroitBean.retirer()}" value="Retirer" icon="ui-icon-trash"   />
+                            </div>
+                        </p:dialog>
+                    </tr>
+                </table>
+                   
+
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

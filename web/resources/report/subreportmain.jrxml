@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreportmain" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="22a4c6b8-7196-4d8d-aae3-1a4efdb7b02a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table_CH" mode="Opaque" backcolor="#CCCCCC" fill="Solid">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" fill="Solid">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="subsistence" class="java.lang.String"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="datemiseplace" class="java.lang.String"/>
+	<field name="mtoctroye" class="java.lang.String"/>
+	<field name="reste" class="java.lang.String"/>
+	<field name="mensualite" class="java.lang.String"/>
+	<field name="validite" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="87" splitType="Stretch">
+			<rectangle>
+				<reportElement x="171" y="0" width="212" height="74" uuid="ac4af1c8-5fa3-4aa2-9de5-ee2dbd74c974"/>
+			</rectangle>
+			<textField>
+				<reportElement x="236" y="40" width="100" height="20" uuid="8b05be4a-cf8f-4d76-a94c-a4295beb61ae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{subsistence}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="197" y="10" width="167" height="20" uuid="93bbf4eb-cae2-479d-8f66-594805360685"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Engagements maximum admis:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="50">
+			<staticText>
+				<reportElement style="table_CH" x="274" y="30" width="71" height="20" uuid="d08a4a87-f1dd-40cf-b0a0-fa7dfceebcba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[ENCOURS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" x="206" y="0" width="140" height="30" uuid="269db349-e367-4cd4-94f4-aa996b7cbd25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[MONTANT DES AVANCES CONSENTIES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" x="345" y="0" width="138" height="50" uuid="9a55754d-18a5-440a-b813-7849eed28ea5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[MONTANT REMBOURSE MENSUELLEMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" x="206" y="30" width="70" height="20" uuid="18e52e73-70b0-4aa6-aa87-69b17ae73699"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[INITIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" x="82" y="0" width="124" height="50" uuid="793501cd-515c-4ce8-bb82-e9cec76ba29d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[DATE DE MISE EN PLACE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" x="0" y="0" width="82" height="50" uuid="b8ce596b-0138-42dc-8ab7-d5bd2e0a37a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[OBJET (CMT,CT ou CLT)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" x="483" y="0" width="72" height="50" uuid="2ef18e35-f7b5-4e4b-a871-60594c9164a1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[VALIDITE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement style="table_TD" x="0" y="0" width="82" height="49" uuid="1be5e641-8169-4806-8321-421adade9f7b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" stretchType="RelativeToBandHeight" x="82" y="0" width="124" height="49" uuid="4dc3c063-9a85-464f-b6f2-220d66d4fef0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{datemiseplace}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="276" y="0" width="70" height="49" uuid="c5bffe63-71e6-48fb-a32a-2f08026cf15b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reste}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="483" y="0" width="72" height="49" uuid="59f79cd6-5e4c-4757-82e2-e8a5b5ed5d86"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{validite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="206" y="0" width="70" height="49" uuid="978025cd-3b37-46db-b45c-7865c66a7a88"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mtoctroye}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="345" y="0" width="138" height="49" uuid="d565f0bd-3e3e-4392-b069-0135a985807e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mensualite}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

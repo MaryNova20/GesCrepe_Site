@@ -1,0 +1,169 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <h:form>
+        <p:growl id="gl" showDetail="true" showSummary="true" /> 
+        <div style="height: 450px" class="layout-portlets-box">
+          
+                <div class="ui-grid-col-4">
+                    <p:panel style="height: 400px" header="EDITION"  >
+                        
+                        <h:panelGrid columns="2">               </h:panelGrid>
+
+                    <div class="ui-grid-col-12">
+                        <h:panelGrid columns="2" width="75%">
+                            <h:outputLabel value="Nom:"/> 
+                            <h:outputLabel value="#{demandeMBean.formObject.matricule.nom}"/> 
+                            <h:outputLabel value="prénoms:"/> 
+                            <h:outputLabel value="#{demandeMBean.formObject.matricule.prenom}"/> 
+                        </h:panelGrid>
+                    </div>
+                    <div class="ui-grid-col-12">
+                        <h:panelGrid columns="2" width="78%">
+                        <p:outputLabel  value="Matricule:"/>
+                        <h:outputLabel value="#{demandeMBean.formObject.matricule.matricule}"/> 
+                        </h:panelGrid>
+                    </div>
+                    <div class="ui-grid-col-12" >
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Indice de la demande:"/> 
+                            <h:outputLabel value="#{demandeMBean.formObject.idDemande}"/> 
+                            <h:outputLabel value="Date de la demande:"/> 
+                            <h:outputLabel value="#{demandeMBean.formObject.dateDemande}">
+                                <f:convertDateTime timeZone="CET" pattern="dd/MM/yyyy"/>
+                            </h:outputLabel>
+                        </h:panelGrid>
+                    </div>
+                       
+                        <h:panelGrid columns="2">    
+                        <p:outputLabel value="Garantie:"/>
+                        <p:selectOneMenu style="width:50px; height: 25px" converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" converterMessage="Conversion echoue" id="garantie"  value="#{demandeMBean.formObject.idGarantie}" title="garantie" >
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItems var="itemgarantie" value="#{demandeMBean.dataListGarantie}" itemValue="#{itemgarantie}" itemLabel="#{itemgarantie.libGarantie}"/>
+                        </p:selectOneMenu> 
+                        
+                        <p:outputLabel value="Montant Demandé:"/>
+                        <p:inputNumber  styleClass="inputMoyen" disabled="true"  id="montantdemande" value="#{demandeMBean.formObject.montantCessible}" title="montant cessible" required="false" requiredMessage="le montant cessible est requis."/>
+
+                      
+                        <p:outputLabel value="Quotite du prêt:"/>
+                        <p:inputNumber symbol="%" symbolPosition="suffix"  styleClass="inputMoyen" disabled="true"   value="#{demandeMBean.formObject.quotiteCessible}" title="quotite" required="false" requiredMessage="le montant cessible est requis."/>
+
+                      
+                        <p:outputLabel  value="Quotité atteinte:" />
+                        <p:inputText disabled="true" styleClass="inputPetit"   id="quotiteatteinte" value="#{demandeMBean.formObject.quotiteAtteinte}" title="quotite atteinte" required="false" requiredMessage="la quotité atteinte est requise."/>
+
+                        
+                      </h:panelGrid>
+                    
+                     </p:panel>  
+                    <div class="boutondiv">
+                        <p:commandButton  update="@form"  value="Valider" actionListener="#{demandeMBean.modifierdem()}" icon="ui-icon-check"/>
+                        <p:commandButton disabled="#{demandeMBean.desactiverBoutonSuppr}" update="@form" actionListener="#{demandeMBean.confirmeSuppression()}" value="Annuler demande" icon="ui-icon-trash"/>
+                    </div>  
+                     
+                </div>
+               
+         <div class="ui-grid-col-8">
+           
+                <div style="margin-top: 10px" class="ftitle" >
+                    
+                   <p:dataTable rows="5" scrollable="true" scrollHeight="200" value="#{demandeMBean.dataList}" var="item" selectionMode="single" selection="#{demandeMBean.selectedObject}" styleClass="datatable" rowKey="#{item.idDemande}">
+                        <p:ajax event="rowDblselect" update="@form" listener="#{demandeMBean.rowSelect()}"/>
+                       <f:facet name="header">
+                          <h:outputText value="Liste des demandes"/>
+                       </f:facet>
+                       
+                    <p:column>
+                       <f:facet name="header">
+                          <h:outputText value="N°Dmde"/>
+                      </f:facet>
+                        <h:outputText value="#{item.idDemande}"/>
+                    </p:column>
+                    <p:column>
+                       <f:facet name="header">
+                          <h:outputText value="Matricule"/>
+                       </f:facet>
+                        <h:outputText value="#{item.matricule.matricule}"/>
+                    </p:column>
+                    <p:column>
+                       <f:facet name="header">
+                          <h:outputText value="Personnel"/>
+                       </f:facet>
+                        <h:outputText value="#{item.matricule.nom} #{item.matricule.prenom}"/>
+                    </p:column>
+                    <p:column>
+                       <f:facet name="header">
+                          <h:outputText value="Poste"/>
+                       </f:facet>
+                        <h:outputText value="#{item.matricule.idPoste.libPoste}"/>
+                    </p:column>
+                    <p:column>
+                       <f:facet name="header">
+                          <h:outputText value="TypePrêt"/>
+                       </f:facet>
+                        <h:outputText value="#{item.idObjet.idType.nature}"/>
+                     </p:column>
+                     <p:column>
+                        <f:facet name="header">
+                           <h:outputText value="Garantie"/>
+                        </f:facet>
+                         <h:outputText value="#{item.idGarantie.libGarantie}"/>
+                    </p:column>
+                    <p:column>
+                       <f:facet name="header">
+                          <h:outputText value="Montant cessible"/>
+                       </f:facet>
+                        <h:outputText value="#{item.montantCessible}"/>
+                   </p:column>
+                   <p:column>
+                       <f:facet name="header">
+                          <h:outputText value="Quotité cessible"/>
+                       </f:facet>
+                       <h:outputText value="#{item.quotiteCessible}"/>
+                   </p:column>
+              
+
+                </p:dataTable>
+              </div>
+                <div class="boutondiv">
+              <p:commandButton  process="@this"  update="@form" actionListener="#{demandeMBean.rafraichir()}" value="Rafraichir" icon="ui-icon-refresh"/>
+          </div>
+         
+             
+          
+       </div>         
+     
+            
+   </div>  
+        
+        <p:confirmDialog   styleClass="confirmDiaolog" message="etes-vous sure de vouloir effectuer la suppression?" closable="false" hideEffect="bounce"
+                           widgetVar="confirmSuppression" >
+            <div class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{demandeMBean.supprimer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:confirmDialog>
+
+        <!--dialog de demande de confirmation d'enregistrement au cas ou il en faut-->
+
+        <p:dialog modal="true"  styleClass="confirmDiaolog" closable="flase" resizable="false" 
+                  widgetVar="confirmEnregistre" >
+            <p:outputLabel value="etes-vous sure de vouloir valider ces informations ?"/><br/>
+            <div  class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{demandeMBean.enregistrer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:dialog>
+
+        
+   </h:form>         
+</ui:composition>
+            

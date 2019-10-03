@@ -1,0 +1,260 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:form>
+        <p:growl id="gl" showDetail="true" showSummary="true" /> 
+        <div  class="layout-portlets-box">
+            <div class="ui-grid-col-6">
+
+                <p:fieldset style="height: 420px" styleClass="infoquotite" toggleable="true" legend="ENREGISTREMENT DE LA DEMANDE">
+
+                    <h:panelGrid columns="2">
+
+                        <p:outputLabel value="Choix du personnel"/>
+                        <p:commandButton process="@this" action="#{demandeMBean.openpersonnel()}" icon="ui-icon-search"/>
+
+                        <p:outputLabel value="Objet du crédit"/>
+                        <p:commandButton process="@this" action="#{demandeMBean.openObjet()}" icon="ui-icon-search"/>
+
+                        <p:outputLabel value="Garantie:"/>
+                        <p:selectOneMenu converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" converterMessage="Conversion echoue" id="garantie" value="#{demandeMBean.formObject.idGarantie}" title="garantie"  >
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItems var="itemgarantie" value="#{demandeMBean.dataListGarantie}" itemValue="#{itemgarantie}" itemLabel="#{itemgarantie.libGarantie}"/>
+                        </p:selectOneMenu> 
+
+                        <p:outputLabel for="montantdemande" value="Montant Demandé:"/>
+                        <p:inputNumber symbol="CFA" symbolPosition="suffix"  styleClass="inputMoyen" value="#{demandeMBean.formObject.montantCessible}"   id="montantdemande" title="montant demande" required="true" requiredMessage="le montant cessible est requis."/>
+
+                        <p:outputLabel value="Quotité cessible:"/>
+                        <p:inputNumber symbolPosition="suffix" symbol="%" readonly="true" styleClass="inputPetit"  id="quotitecessible" value="#{demandeMBean.quotitecessible}" title="quotite cessible" required="false" requiredMessage="la quotité cessible est requise."/>
+
+                        <p:outputLabel value="Montant cessible:"/>
+                        <p:inputNumber decimalPlaces="0" decimalSeparator="." readonly="true" styleClass="inputMoyen"    value="#{demandeMBean.montantcessible}" title="montant cessible" required="false" requiredMessage="la quotité cessible est requise."/>
+
+                        <p:outputLabel  value="Quotité atteinte:" />
+                        <p:inputNumber symbol="%" symbolPosition="suffix" disabled="true" styleClass="inputPetit"   id="quotiteatteinte" value="#{demandeMBean.quotiteatteinte}" title="quotite atteinte" required="false" requiredMessage="la quotité atteinte est requise."/>
+                        <p:outputLabel  value="Salaire résiduel :" />
+                        <p:inputNumber symbol="CFA" symbolPosition="suffix" disabled="true" styleClass="inputMoyen"    value="#{demandeMBean.salaireresiduel}" title="salaire residuel" required="false" requiredMessage="la quotité atteinte est requise."/>
+
+                        <p:outputLabel for="dtDemande" value="Date de demande:" />
+                        <p:calendar required="true" requiredMessage="renseigner la date" maxdate="#{demandeMBean.maxdate}" mask="99/99/9999"  pattern="dd/MM/yyyy" timeZone="CET" styleClass="inputDate" showOn="button" id='dtDemande' value="#{demandeMBean.formObject.dateDemande}" effect="fold"/>
+
+
+
+                    </h:panelGrid>
+
+                    <div class="ui-grid-col-6">
+                        <p:outputLabel  value="Appréciation:"/>
+                    </div>
+
+                    <div class="ui-grid-col-6">
+                        <p:outputLabel  value="Commentaire:"/>
+                    </div> 
+
+
+                    <div class="ui-grid-col-6">
+                        <p:inputTextarea  rows="2" cols="15" value="#{demandeMBean.formObject.appreciation}" autoResize="true" title="appreciation" required="false" requiredMessage="l'appréciation est requise."/>
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <p:inputTextarea  rows="2" cols="15" value="#{demandeMBean.formObject.commentaire}" autoResize="true" title="commentaire" required="false" requiredMessage="Ce champ est requise."/>   
+                    </div>
+
+
+
+                </p:fieldset>  
+            </div>
+            <div class="ui-grid-col-6">
+                <p:panel styleClass="info" style="height: 430px" header="INFORMATIONS DU PERSONNEL">
+
+                    <h:panelGrid columns="4" >
+                        <h:outputLabel value="Nom:"/> 
+                        <h:outputLabel value="#{demandeMBean.selemploye.nom}"/> 
+                        <h:outputLabel value="prénoms:"/> 
+                        <h:outputLabel value="#{demandeMBean.selemploye.prenom}"/> 
+
+                        <h:outputLabel style="margin-left: 2%" value="Indice:"/> 
+                        <h:outputLabel value="#{demandeMBean.selemploye.indice}"/> 
+                        <h:outputLabel value="Matricule:"/> 
+                        <h:outputLabel value="#{demandeMBean.selemploye.matricule}"/> 
+
+                        <h:outputLabel value="Poste occupé:" /> 
+                        <h:outputLabel value="#{demandeMBean.selemploye.idPoste.libPoste}"/> 
+
+                        <h:outputLabel value="Date d'embauche:"/> 
+                        <h:outputLabel value="#{demandeMBean.selemploye.dateEmb}">
+                            <f:convertDateTime pattern="dd/MMMM/yyyy" timeZone="CET"/>
+                        </h:outputLabel>
+                        <h:outputLabel value="Salaire:"/> 
+                        <h:outputLabel value="#{demandeMBean.selemploye.salaire}"/> 
+                        <p:outputLabel value="Motif :"/>
+
+                        <p:outputLabel value="#{demandeMBean.selobjetcredit.libObjet}"/>
+                        <p:outputLabel value="Durée  :"/>
+
+                        <p:outputLabel style="color: red" value="#{demandeMBean.selobjetcredit.idType.duree} mois"/>
+                    </h:panelGrid>
+                    <p:dataTable  rowKey="#{item.idEncours}" selection="#{demandeMBean.sellistencours}" styleClass="info" rows="2" paginator="true" paginatorPosition="top" scrollHeight="250" scrollable="true" value="#{demandeMBean.listencours}" var="item">
+                       
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Montant reçu"/>
+                            </f:facet>
+                            <h:outputText value="#{item.montantOctroye}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Mensualité"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mensualite}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Objet"/>
+                            </f:facet>
+                            <h:outputText value="#{item.objet}"/>
+                        </p:column>
+                         <p:column selectionMode="multiple"  style="width:90px;text-align:center">
+                                <f:facet name="header">
+                                    <h:outputText value="Rachat"/>
+                                </f:facet>
+                            </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </div>
+
+
+
+
+            <div class="boutondiv">
+                <p:commandButton   update="@form"  value="Calcul de quotité" actionListener="#{demandeMBean.montant()}"  icon="ui-icon-refresh"/>
+                <p:commandButton  process="@this"   value="Enregistrer la demande"  actionListener="#{demandeMBean.confirmerEnregistrer()}" icon="ui-icon-disk"/>
+
+            </div>  
+             <p:dataTable value="#{demandeMBean.dataList}" var="item">
+                     
+                 <p:column resizable="true">
+                            <f:facet name="header">
+                                <h:outputText value="DateDemande"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateDemande}">
+                                <f:convertDateTime pattern="dd/MM/yyyy " />
+                            </h:outputText>
+                       </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Montant Demande"/>
+                            </f:facet>
+                            <h:outputText value="#{item.montantCessible}"/>
+                       </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Quotite credit"/>
+                            </f:facet>
+                            <h:outputText value="#{item.quotiteCessible}"/>
+                       </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Quotite Atteinte"/>
+                            </f:facet>
+                            <h:outputText value="#{item.quotiteAtteinte}"/>
+                       </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Appreciation"/>
+                            </f:facet>
+                            <h:outputText value="#{item.appreciation}"/>
+                       </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Decision"/>
+                            </f:facet>
+                            <h:outputText value="#{item.decision}"/>
+                       </p:column>
+                      
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Employe"/>
+                            </f:facet>
+                            <h:outputText value="#{item.matricule.nom}"/>
+                       </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Objet"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idObjet.libObjet}"/>
+                       </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Duree"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idObjet.idType.duree} mois"/>
+                       </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Garantie"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idGarantie.libGarantie}"/>
+                       </p:column>
+                    </p:dataTable>
+            
+
+        </div>
+
+
+     
+
+        <!--dialog de demande de confirmation d'enregistrement au cas ou il en faut-->
+
+        <p:dialog modal="true"  styleClass="confirmDiaolog" closable="flase" resizable="false" 
+                  widgetVar="confirmEnregistre" >
+            <p:outputLabel value="êtes-vous sûr de vouloir valider ces informations ?"/><br/>
+            <div  class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{demandeMBean.enregistrer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:dialog>
+
+        <p:dialog modal="true"  styleClass="verifEnreg" closable="false" resizable="false" 
+                  widgetVar="confirmcalcul" >
+            <p:outputLabel value="Veuillez renseigner les informations et calculer la quotité"/><br/>
+            <div  class="boutondiv">
+                <center>
+                    <p:commandButton value="OK" onclick="PF('confirmcalcul').hide();" style="font-size: 15px"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                            /> 
+                </center>
+           
+            </div>
+        </p:dialog>
+        
+           <p:dialog modal="true"  styleClass="confirmComite" closable="flase" resizable="false" 
+                  widgetVar="confirmComite" >
+            <p:outputLabel value="Quotite dépassée voulez vous faire passez le prêt en comité ?"/><br/>
+            <div  class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmComite').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{demandeMBean.comite()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmComite').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:dialog>
+
+       <p:dialog modal="true"  styleClass="verifdepasse" closable="false" resizable="false" 
+                  widgetVar="erreurdepassement" >
+            <p:outputLabel value="Veuillez renseigner les informations et calculer la quotité"/><br/>
+            <div  class="boutondiv">
+                <center>
+                    <p:commandButton value="OK" onclick="PF('erreurdepassement').hide();" style="font-size: 15px"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                            /> 
+                </center>
+           
+            </div>
+        </p:dialog>
+
+    </h:form>
+    <ui:include src="../dialogs/dialogRecherchPersonnel.xhtml"/>
+    <ui:include src="../dialogs/dialogRecherchObjet.xhtml"/>
+</ui:composition>

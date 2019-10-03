@@ -1,0 +1,450 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18 févr. 2017, 13:25:39
+    Author     : SAP
+*/
+
+.label{
+    font-size: 15px; 
+    text-align: left;
+}
+
+
+.button{
+    text-align: center;
+    float: right;
+    font-size: 10px; 
+    font-family: Tahoma, Verdana, Arial, sans-serif !important;   
+}
+
+
+.lfooter{
+    font-family: Tahoma, Verdana, Arial, sans-serif !important;
+/*    color: blue;    */
+}
+
+
+.tabview{
+    font-size: 12px;
+}
+.dlg{
+    font-size: 15px;
+    width: 240px;  
+    border-radius: 10px;
+    border-style: outset;
+}
+
+.input{
+    width: 180px;
+    font-size: 15px;
+}
+
+.datatable{
+    // border-style: outset;
+    font-size: 9px!important;
+    // border-radius: 10px;
+    margin-left: 15px;
+
+}
+
+.tableau{
+    border-style: outset;
+    font-size: 10px;
+    width: 400px;
+    float: right;
+    border-radius: 2px;
+    margin-left: 25px;
+
+}
+.ui-dialog{
+
+    border:4px solid #fdaf42;
+}
+.ui-datepicker {  
+    width: 180px;  
+    height: auto;  
+    margin: 5px auto 0;  
+    font: 9pt Arial, sans-serif;  
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);  
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);  
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);  
+}  
+.ui-datepicker-buttonpane{
+    height: -5px!important;
+}
+
+.combo{
+    width: 50px;
+}
+
+.gallerie{
+    width: 1000px;
+    height:650px;
+
+}
+
+.menuitem{
+    font-size: 12px;
+}
+
+
+.tab{
+    font-size: 10px;
+}
+.ui-fieldset{
+    font-size: 12px;
+    text-align: left;
+    border-radius:1px; 
+
+}
+ui-fieldset-legend{
+    font-size: 5px;
+}
+
+
+a{
+    text-decoration: none;
+}
+
+.ui-button {
+    font-size: 13px;
+}
+
+.boutondiv{
+    text-align: right;
+    padding: 5px;
+    padding-bottom: 1px;
+    padding-top: 1px;
+    border-radius: 6px;
+    margin-top: 2px;
+    background-color: #cecfcf;
+    font-size: 11px;
+
+}
+
+.ftitle{
+    text-align: left;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px;
+    text-shadow: 0px -1px 0px rgb(17, 124, 192);
+    margin-bottom: 10px;
+    border-radius: 3px;
+    background-color: #cecfcf;
+
+}
+.ui-inputfield{
+    width:215px;
+    //height:15px;
+    margin-top: 5px;
+    padding-right: 0px !important;
+    box-shadow:0px 2px 4px #EAEAEA inset !important;
+}
+
+.ui-state-disabled{
+    color:black;
+    opacity: 0.45 !important;
+
+}
+
+.ui-selectonemenu{
+    width:210px !important;
+
+}
+
+.ui-inputfield:hover{
+
+    box-shadow:1px 1px 8px #D6EFFC !important;
+}
+
+
+
+.ui-fieldset-content{
+    height: auto !important;
+}
+
+.ui-button-text{
+font-size: 10px;
+
+}
+
+.ui-orderlist-item{
+    font-size: 15px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.ui-state-highlight a{
+    color: #FFF !important;
+}
+
+.ui-fieldset{
+    background: none;
+    margin: 5px;
+}
+
+.ui-fieldset-content{
+    width: 100% !important;
+
+}
+
+.categFieldSet .ui-fieldset-content{
+    height: 100px !important;
+    overflow-y: scroll;
+}
+
+.categFieldSet2 .ui-fieldset-content{
+
+}
+
+.ui-datatable tbody td{
+    white-space: normal !important
+        font-size: 15px!important;
+}
+
+.ui-tabs-selected{
+/*    background-color: #2d9ae3 !important;*/
+    border: none;
+
+}
+
+.ui-tabs-selected a{
+    color:#fff !important;
+    text-shadow: none;
+}
+
+.btspan{
+
+
+}
+
+
+.myDataTable .ui-state-default{
+    font-size: 12px !important;
+    font-weight: bold !important;
+}
+
+.ui-datatable-scrollable-body {
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ccc !important;
+}
+
+.ui-selectonemenu-list-item, .ui-autocomplete-list-item ,.ui-selectonemenu-item td{
+    height: 8px;
+    font-size: 12px !important;
+}
+
+.info1{
+    border-radius: 5px;
+   
+    color: #333333;
+    font-size: 11px;
+    padding: 10px;
+    min-height: 300px;
+}
+
+
+.ui-column-filter{
+    height: 15px;
+}
+
+.ui-outputlabel-rfi {
+    color: red !important;
+}
+
+.ui-button{
+    height:auto;
+}
+
+.ui-widget{
+    font-size:14px;
+}
+
+.ui-wizard-step-title{
+    font-size: 13px !important;
+    font-weight: bold !important;
+}
+
+.longInput .ui-inputfield{
+    width:215px;
+}
+.longInputextarea{
+    width:415px;
+    height:115px;
+}
+
+.ui-datepicker-trigger, .petit_button{
+    //height: 25px;
+    //width: 20px !important;
+
+}
+
+.longInput .ui-selectonemenu{
+    width:225px !important;
+}
+.ui-datatable tbody td{
+    white-space: normal !important;
+    font-size: 13px!important;
+}
+
+
+
+.numerotation_form  .ui-inputfield{
+    width: 100px !important;
+}
+
+
+
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td {
+    padding: 0px 0px ! important;
+    overflow: hidden;
+    border-width: 1px;
+    border-style: solid ! important;
+}
+
+
+
+
+
+.ui-datatable-tablewrapper table tr th span{
+    font-size: 16px!important;
+}
+
+.ui-autocomplete-table{
+    font-size: 10px !important;
+    width: 280px !important;
+
+}
+
+.ui-autocomplete-table td{
+    border-color: #CCC !important;
+}
+
+
+.inputMulticritere{
+    width: 80px !important;
+}
+
+.inputSearch{
+    width: 190px !important;
+}
+
+.inputBtntSearch{
+    width: 25px;
+}
+
+.inputMoyen , .inputMoyen .ui-autocomplete-input, .inputMoyen .ui-inputtext{
+    width: 120px !important;   
+}
+.inputGrandMoyen , .inputGrandMoyen .ui-autocomplete-input, .inputGrandMoyen .ui-inputtext{
+    width: 220px !important;   
+}
+
+.inputPetit, .inputPetit .ui-autocomplete-input, .inputPetit .ui-inputtext{
+    width: 80px !important;  
+}
+
+.inputPetitCat, .inputPetitCat .ui-autocomplete-input, .inputPetitCat .ui-inputtext{
+    width: 140px !important;  
+}
+.input25px, .input25px .ui-autocomplete-input, .input25px .ui-inputtext{
+    width: 25px !important;  
+}
+.input35px, .input35px .ui-autocomplete-input, .input35px .ui-inputtext{
+    width: 35px !important;  
+}
+
+.inputDate .ui-inputfield{
+    width: 80px!important;
+}
+
+.button-autocomplete{
+    margin-left: 30px !important;
+}
+
+
+.confirmDiaolog{
+    font-size: 15px!important;
+    border: 5px;
+    background: #6666ff;
+    height: 125px;
+    width: 260px;
+
+}
+.erreurDialog{
+    font-size: 15px!important;
+    border: 5px;
+    background: #ff3333;
+    height: 125px;
+    width: 260px;
+
+}
+
+.succesDialog{
+    font-size: 15px!important;
+    border: 5px;
+    background-color: #00cc66!important;
+    height: 130px;
+    width: 260px;
+
+}
+
+/*****fin composant ****/
+
+/* This button was generated using CSSButtonGenerator.com */
+
+.ui-dialog-titlebar-close {
+    position: initial !important;
+
+}
+
+.ui-dialog-content{
+    background-color: #E6E9EE !important;
+    border-top:1px solid #CCC !important;
+    padding: 3px !important;
+}
+
+.dlgFondBlanc .ui-dialog-content {
+    background-color: #DDEEF6 !important;
+}
+
+.ui-dialog-titlebar{
+    margin: 0px !important;
+    color:#666666 !important;
+}
+
+
+/* Containers */
+.Container100{ width:100%;  float:left;}
+.Container96{ width:96%;  float:left;}
+.Container90{ width:90%;  float:left;}
+.Container85{ width:85%;  float:left;}
+.Container80{ width:80%;  float:left;}
+.Container75{ width:75%;  float:left;}
+.Container70{ width:70%;  float:left;}
+.Container60{ width:60%;  float:left;}
+.Container50{ width:50%;  float:left;}
+.Container40{ width:40%;  float:left;}
+.Container33{ width:33.3%;  float:left;}
+.Container30{ width:30%;  float:left;}
+.Container25{ width:25%;  float:left;}
+.Container20{ width:20%;  float:left;}
+.Container10{ width:10%;  float:left;}
+.Container5{ width:5%;  float:left;}
+
+.ui-inputfield{
+    font-family: fantasy;
+    font-size: 14px;
+    height: 30px;
+}
+.ui-outputlabel{
+    font-size: 15px;
+    font-family: ralewayregular;
+}

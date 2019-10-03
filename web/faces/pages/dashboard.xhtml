@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+        <script type="text/javascript">
+            function skinChart() {
+                this.cfg.shadow = false;
+                this.cfg.seriesColors = ['#71CC8D', '#33AFDE', '#F7941E'];
+                this.cfg.grid = {
+                    background: '#EDF3F6',
+                    borderColor: '#D9E3E8',
+                    gridLineColor: '#D9E3E8',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#778D9B'
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    shadow: false,
+                    markerOptions: {
+                        shadow: false
+                    }
+                };
+            }
+
+            function skinPie() {
+                this.cfg.seriesColors = ['#dae8ef', '#27aae1', '#33ccff', '#9fadb5'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#eaeaea',
+                    gridLineColor: '#e5ebf0',
+                    shadow: false,
+                    borderWidth: 0
+                };
+                this.cfg.seriesDefaults.shadow = false;
+            }
+        </script>
+        <style type="text/css">
+            .jqplot-target, .jqplot-axis {
+                color: #778D9B;
+            }
+        </style>
+    </ui:define>
+    <ui:define name="content">
+        <!-- BOX START -->
+        <div style="height: 450px" class="layout-portlets-box">
+            <div class="Container100 Responsive">
+                <div class="ContainerIndent">
+                    <div class="Container100">
+
+                        <div class="DispInlBlock MarTop20">
+                            <div class="Container20"><i class="fa fa-user Fs50 red Fleft MarRight10"></i></div>
+                            <div class="Container80">
+                                <div class="Fright">
+                                    <h2 class="black Fs24 FontRalewayMedium">#{loginManagedBean.connectutilisateur.nomuser}  #{loginManagedBean.connectutilisateur.loginuser}</h2>
+                                </div>
+                            </div>
+                        </div>
+                   
+                    </div>
+                </div>
+            </div>
+            <div class="layout-portlets-box">
+                <center> <h1>GESTION DES CREDITs DU PERSONNEL BIATogo (GESCREPE)</h1>
+                    <h3>GESCREPE est  un outil permettant de procéder:</h3> 
+                    <h3>* au montage des dossiers de demande de crédit des employés de la banque</h3>
+                    <h3>* au déclenchement du décaissement de ceux-ci.</h3>
+                                    <br></br>
+                                        
+                    <h4>Destiné exclusivement à la BIA-TOGO</h4>
+                </center>
+            </div>
+               
+            </div>
+
+    </ui:define>
+
+
+</ui:composition>

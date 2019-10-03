@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+              template="./../../WEB-INF/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:bnu="http://bootsfaces.net/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <p:panel style="height: 465px" header="GESTION DES MENUS">
+            <h:form id="formmenu">
+                <p:growl id="growlmenu"  showDetail="true" showSummary="false" autoUpdate="true" life="2000" />
+                <p:wizard backLabel="Precedent" style="height: 500px"  nextLabel="Suivant">
+                    <p:tab title="ADMINISTRATION" titleStyle="font-size:15px;">
+
+                        <p:dataTable value="#{enregSousmenuBean.sousmenu1}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <p:outputLabel value="Numero d'ordre"/>
+                                </f:facet>
+                                <h:outputText value="#{item.numOrdre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Description"/>
+                                </f:facet>
+                                <h:outputText value="#{item.menuItemDesc}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:tab>
+
+                    <p:tab title="DEMANDES" titleStyle="font-size:15px;">
+                        <p:dataTable value="#{enregSousmenuBean.sousmenu2}" var="item2">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Numero d'ordre"/>
+                                </f:facet>
+                                <h:outputText value="#{item2.numOrdre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Description"/>
+                                </f:facet>
+                                <h:outputText value="#{item2.menuItemDesc}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:tab>
+                    <p:tab title="SUIVI  DES DEMANDES" titleStyle="font-size:15px;">
+                        <p:dataTable value="#{enregSousmenuBean.sousmenu3}" var="item3">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Numero d'ordre"/>
+                                </f:facet>
+                                <h:outputText value="#{item3.numOrdre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <p:outputLabel value="Description"/>
+                                </f:facet>
+                                <h:outputText value="#{item3.menuItemDesc}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:tab>
+                    <p:tab title="EDITIONS DES ETATS" titleStyle="font-size:15px;">
+                        <p:dataTable value="#{enregSousmenuBean.sousmenu4}" var="item4">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Numero d'ordre"/>
+                                </f:facet>
+                                <h:outputText value="#{item4.numOrdre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Description"/>
+                                </f:facet>
+                                <h:outputText value="#{item4.menuItemDesc}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:tab>
+                </p:wizard>
+                <div class="boutondiv">
+                    <p:commandButton process="@this" disabled="#{enregSousmenuBean.desactiver}" value="Valider" update="@form" actionListener="#{enregSousmenuBean.valider()}" icon="ui-icon-check"/>
+                </div>
+
+
+            </h:form>
+        </p:panel>
+    </ui:define>
+
+</ui:composition>

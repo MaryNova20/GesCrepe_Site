@@ -1,0 +1,120 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <h:form>
+        <p:growl id="gl" showDetail="true" showSummary="true" /> 
+        <div style="height: 450px" class="layout-portlets-box">
+            <p:panel style="height: 100px" header="FICHE DE COMITE PAR PERSONNEL "  >
+                  <p:fieldset toggleable="true" >
+                      <h:panelGrid columns="5" >
+                       <p:outputLabel value="Choix du personnel"  />
+                       <p:commandButton process="@this" action="#{encoursMBean.openpersonnel()}" icon="ui-icon-search"/>
+
+                       <p:commandButton actionListener="#{encoursMBean.ficheComite()}" update="@form" value="valider" />
+                      </h:panelGrid>  
+                    </p:fieldset>
+            </p:panel> 
+            
+            <div class="boutondiv">
+                <p:commandButton value="Imprimer" icon="ui-icon-print" action="#{encoursMBean.imprimerFicheComite()}" oncomplete="PF('dialogueExport').show()" />
+
+                </div>
+                <div style="margin-top: 10px" class="ftitle">
+                    <center>
+                        <h:outputLabel value="Informations relatives au personnel sélectionné"/>
+                    </center>
+                </div>
+            
+            <div class="ui-grid-col-4">
+                
+                <p:panel styleClass="info" style="height: 250px" header="INFORMATIONS DU PERSONNEL">
+
+                    <h:panelGrid columns="2" >
+                        <h:outputLabel value="Nom:"/> 
+                        <h:outputLabel value="#{encoursMBean.selemploye.nom}"/>
+                        
+                        <h:outputLabel value="prénoms:"/> 
+                        <h:outputLabel value="#{encoursMBean.selemploye.prenom}"/> 
+
+                        <h:outputLabel style="margin-left: 2%" value="Indice:"/> 
+                        <h:outputLabel value="#{encoursMBean.selemploye.indice}"/> 
+                        
+                        <h:outputLabel value="Matricule:"/> 
+                        <h:outputLabel value="#{encoursMBean.selemploye.matricule}"/> 
+
+                        <h:outputLabel value="Poste occupé:" /> 
+                        <h:outputLabel value="#{encoursMBean.selemploye.idPoste.libPoste}"/> 
+
+                        <h:outputLabel value="Date d'embauche:"/> 
+                        <h:outputLabel value="#{encoursMBean.selemploye.dateEmb}">
+                            <f:convertDateTime pattern="dd/MMMM/yyyy" timeZone="CET"/>
+                        </h:outputLabel>
+                        
+                        <h:outputLabel value="Salaire:"/> 
+                        <h:outputLabel value="#{encoursMBean.selemploye.salaire}"/>
+                    </h:panelGrid>
+               </p:panel>
+            </div>
+            
+            <div class="ui-grid-col-8">
+                <p:fieldset toggleable="true" style="height: 220px" >
+            <p:dataTable paginator="true" rows="2" paginatorPosition="top" scrollHeight="250" scrollable="true" value="#{encoursMBean.comitelist}" var="item">
+                
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="TypeCrédit"/>
+                        </f:facet>
+                        <h:outputText value="#{item.type}"/>
+                     </p:column>
+                    
+                     <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date mise en place"/>
+                        </f:facet>
+                          <h:outputText value="#{item.datemiseplace}"/>
+                     </p:column>
+                
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Montant"/>
+                        </f:facet>
+                        <h:outputText value="#{item.mtoctroye}"/>
+                     </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Reste"/>
+                        </f:facet>
+                        <h:outputText value="#{item.reste}">
+                        </h:outputText>
+                     </p:column>
+                      
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Mensualite"/>
+                        </f:facet>
+                        <h:outputText value="#{item.mensualite}"/>
+                     </p:column>
+                
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Validité"/>
+                        </f:facet>
+                        <h:outputText value="#{item.validite}"/>
+                     </p:column>
+                 
+                </p:dataTable>
+                 </p:fieldset>
+                </div>
+            
+        </div>  
+  <ui:include src="../dialogs/dialogRecherchPersonnelNew.xhtml"/>      
+
+   </h:form>  
+      <ui:include src="../dialogs/dlgExport.xhtml"/>
+  <ui:include src="../dialogs/dlgAffichePdf.xhtml"/>
+</ui:composition>
+            

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../WEB-INF/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:bnu="http://bootsfaces.net/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <p:panel style="height: 460px" header="JOURNAL SYSTEME">
+          
+                <f:view>
+                  
+                    <h:form id="totjrnal">
+                        <center>
+                            <p:dataTable value="#{loginManagedBean.listjournal}" var="item"
+                                         scrollable="true" scrollHeight="320"
+                                         paginator="true" rows="15" paginatorPosition="top">
+
+                                <p:column filterMatchMode="contains" filterBy="#{item.typeOperId.typeOperDesc}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Operation"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.typeOperId.typeOperDesc}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Description"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.logDesc}"/>
+                                </p:column>
+                                <p:column filterMatchMode="contains"  filterBy="#{item.logDate}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Date operation"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.logDate}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Employe"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.iduser.nomuser}"/>
+                                </p:column>
+
+                            </p:dataTable>
+                        </center>
+                        <div class="boutondiv">
+                            <p:commandButton value="actualiser" update="@form"/>
+                        </div>
+                    </h:form>
+                </f:view>
+            
+           
+        </p:panel>
+    </ui:define>
+
+</ui:composition>

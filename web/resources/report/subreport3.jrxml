@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport3" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aa5758d9-f135-4b40-8421-1aad63018010">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table_CH" mode="Opaque" backcolor="#CCCCCC" fill="Solid">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" fill="Solid">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="garantie" class="java.lang.String"/>
+	<parameter name="total" class="java.lang.String"/>
+	<field name="indice" class="java.lang.String"/>
+	<field name="numcredit" class="java.lang.String"/>
+	<field name="reste" class="java.lang.String"/>
+	<field name="typecredit" class="java.lang.String"/>
+	<field name="mtoctroye" class="java.lang.String"/>
+	<field name="mtdemande" class="java.lang.String"/>
+	<field name="validite" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="230" splitType="Stretch">
+			<staticText>
+				<reportElement style="table_TD" x="0" y="0" width="143" height="36" uuid="a7be6200-7c11-4d43-9f79-0881f8bda62e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[CARACTERISTIQUES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="143" y="0" width="100" height="62" uuid="efd9c365-1c7b-4bdb-8f91-03d8074f42da"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[ENCOURS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="243" y="0" width="93" height="62" uuid="477178ce-9c34-422a-81a7-39063564312c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[NATURE DES OPERATIONS ET NUMERO DES COMPTES UTILISATION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="425" y="0" width="70" height="62" uuid="58a12aa2-48b2-486d-a2a7-16139f9663fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[SOLLICITES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="495" y="0" width="60" height="62" uuid="4172a0d9-4c88-4086-a5fc-c0b1373e6df7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[VALIDITES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="72" y="36" width="71" height="26" uuid="3088de5d-bb05-49e8-bded-08f2cd97e461"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[N° CREDIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="336" y="0" width="89" height="62" uuid="d0b01a1d-e494-42d2-8dca-f9b5f5be4240"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[AUTORISATION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="0" y="36" width="72" height="26" uuid="f43b0408-5b00-4780-b5b1-21ba54786535"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[INDICE]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="table_TD" x="72" y="62" width="71" height="34" uuid="25a2f646-a160-40f7-9d18-6560aa99deac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numcredit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="143" y="62" width="100" height="34" uuid="993c3395-f2ca-4013-bff9-669b1ef8cb18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reste}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="243" y="62" width="93" height="34" uuid="e491513a-bba0-47d1-b0fb-4c6c4bd9b6a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{typecredit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="336" y="62" width="89" height="34" uuid="d464b47a-ebfe-4c44-bf1a-d1504b126662"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mtoctroye}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="136" width="97" height="41" uuid="515ae6dc-53f5-46a1-b97b-abc285f7f6bf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Garanties]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="177" width="555" height="53" uuid="0035ff24-766f-4171-8ebd-dad613014b3c"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" x="0" y="177" width="555" height="39" uuid="e76d0f07-c30e-4ff1-b2f6-508796d0c79e"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{garantie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="336" y="96" width="89" height="40" uuid="b6197cb5-096b-4ef4-a208-af1ddb59f7bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="table_TD" x="243" y="96" width="93" height="40" uuid="e6427e94-bef6-427e-8468-d9c52970d5d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[TOTAUX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="96" width="130" height="40" uuid="6eaf755d-ccec-461e-8747-ff703506b43f"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="96" width="243" height="40" uuid="dbdb5ac5-29a7-4c50-bd65-e8c43b1a4bf6"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" stretchType="RelativeToBandHeight" x="495" y="62" width="60" height="34" uuid="4bf9e7d8-6e43-4567-aeda-2d03bb2c912f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{validite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="0" y="62" width="72" height="34" uuid="8e55cce6-5592-47cf-9197-b23bd6209de4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{indice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="425" y="62" width="70" height="34" uuid="18478745-38cb-4e00-9155-e450f159dcbf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{mtdemande}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

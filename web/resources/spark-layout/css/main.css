@@ -1,0 +1,22 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28 mai 2016, 08:55:03
+    Author     : UTILISATEUR
+*/
+
+.ui-inputfield{
+    margin: 0;
+    padding: 0 0 0 5px !important;
+    line-height: 30px;
+}
+.ui-selectonemenu-list-item, .ui-autocomplete-list-item ,.ui-selectonemenu-item td{
+        height: 20px;
+    font-size: 15px !important;
+}
+.inputDate .ui-inputfield{
+    width: 80px!important;
+}

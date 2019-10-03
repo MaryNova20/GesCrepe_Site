@@ -1,0 +1,81 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form>
+        <p:growl id="gl" showDetail="true" showSummary="true" />  
+        <center>
+            <br> </br>
+            <!--p style="alignment-adjust: central">RAD DU FORMULAIRE GARANTIE</p-->
+            <div >
+                <p:panel style="width: 800px" header="Gestion des garanties">
+                    <p:fieldset toggleable="true" legend="edition">
+                        <h:panelGrid  columns="2">
+                      
+  <p:outputLabel  value="Libellé de la garantie:" for="libgarantie" />
+  <p:inputText   id="libgarantie" value="#{garantieMBean.formObject.libGarantie}" title="libgarantie" required="true" requiredMessage="le libellé est requis."/>
+                          
+</h:panelGrid>
+
+                    </p:fieldset>
+
+
+                    <div class="boutondiv">
+                        <p:commandButton  update="@form"  value="Valider" actionListener="#{garantieMBean.enregistrer()}" icon="ui-icon-check"/>
+                        <p:commandButton disabled="#{garantieMBean.desactiverBoutonSuppr}" update="@form" actionListener="#{garantieMBean.confirmeSuppression()}" value="Supprimer" icon="ui-icon-trash"/>
+                        <p:commandButton value="Imprimer" icon="ui-icon-print"/>
+                    </div>
+                    <div style="margin-top: 10px" class="ftitle">
+                        <h:outputLabel value="Liste des garanties"/>
+                    </div>
+                    <div >
+                        <p:dataTable paginatorPosition="top" paginatorAlwaysVisible="false" paginator="true" reflow="true" rows="5" id="dta" rowKey="#{itemListgarantie.idGarantie}" selectionMode="single" selection="#{garantieMBean.selectedObject}" styleClass="datatable" value="#{garantieMBean.dataList}" var="itemListgarantie">
+                            <p:ajax event="rowDblselect" update="@form" listener="#{garantieMBean.rowSelect()}"/>
+                          
+                            <p:column filterBy="#{itemListgarantie.libGarantie}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Libellé garantie"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListgarantie.libGarantie}"/>
+                            </p:column>
+  <f:facet name="footer">
+                                <p:outputLabel  value="RAD(Rapid Application developpment) powered by MENSAH Y.O.D"/>
+                            </f:facet>
+                        </p:dataTable>
+                        <div class="boutondiv">
+                            <p:commandButton  process="@this"  update="@form" actionListener="#{garantieMBean.rafraichir()}" value="Rafraichir" icon="ui-icon-refresh"/>
+
+                        </div>
+
+                    </div>
+
+                </p:panel>
+            </div>
+        </center>
+        <p:confirmDialog   styleClass="confirmDiaolog" message="etes-vous sure de vouloir effectuer la suppression?" closable="false" hideEffect="bounce"
+                           widgetVar="confirmSuppression" >
+            <div class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{garantieMBean.supprimer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:confirmDialog>
+
+        <!--dialog de demande de confirmation d'enregistrement au cas ou il en faut-->
+
+        <p:dialog modal="true"  styleClass="confirmDiaolog" closable="flase" resizable="false" 
+                  widgetVar="confirmEnregistre" >
+            <p:outputLabel value="etes-vous sure de vouloir valider ces informations ?"/><br/>
+            <div  class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{garantieMBean.enregistrer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:dialog>
+
+    </h:form>
+ </ui:composition>
+

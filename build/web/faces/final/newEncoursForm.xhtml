@@ -1,0 +1,122 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form>
+        <p:growl id="gl" showDetail="true" showSummary="true" />  
+        <center>
+            <br> </br>
+            
+            <div>
+                <p:panel style="width: 800px" header="Gestion des encours">
+                    
+  <p:outputLabel  value="Nom et Prénom " for="employe" />
+  <p:inputText   id="employe" value="#{encoursMBean.formObject.matricule.nom} #{encoursMBean.formObject.matricule.prenom}" title="employe" required="false" requiredMessage="" />
+                              
+                    
+  <p:outputLabel  value="Poste occupé " for="fonction" />
+  <p:inputText   id="fonction" value="#{encoursMBean.formObject.matricule.idPoste.libPoste} " title="fonction" required="false" requiredMessage=""/>
+                                           
+  
+  <div style="margin-top: 10px" class="ftitle">
+          <h:outputLabel value="Liste des encours "/>
+  </div>
+  
+  <div class="boutondiv">
+       <p:commandButton  update="@form"  value="Valider" actionListener="#{encoursMBean.enregistrer()}" icon="ui-icon-check"/>
+       <p:commandButton disabled="#{encoursMBean.desactiverBoutonSuppr}" update="@form" actionListener="#{encoursMBean.confirmeSuppression()}" value="Supprimer" icon="ui-icon-trash"/>
+       <p:commandButton value="Imprimer" icon="ui-icon-print"/>
+   </div>
+  
+  <div>
+       <p:dataTable paginatorPosition="top" paginatorAlwaysVisible="false" paginator="true" reflow="true" rows="5" id="dta" rowKey="#{itemListencours.idEncours}" selectionMode="single" selection="#{encoursMBean.selectedObject}" styleClass="datatable" value="#{encoursMBean.dataList}" var="itemListencours">
+       <p:ajax event="rowDblselect" update="@form" listener="#{encoursMBean.rowSelect()}"/>
+       
+  
+  <div style="margin-top: 10px" class="ftitle">
+      
+    <div style="margin-top: 10px" class="ftitle"> 
+        <p:column filterBy="#{itemListencours.numCredit}" filterMatchMode="contains">
+           <f:facet name="header">
+              <h:outputText value="Numéro crédit"/>
+           </f:facet>
+            <h:outputText value="#{itemListencours.numCredit}"/>
+       </p:column>
+    </div>
+    
+    <div style="margin-top: 10px" class="ftitle">
+        <p:column filterBy="#{itemListencours.objet}" filterMatchMode="contains">
+           <f:facet name="header">
+              <h:outputText value="Objet crédit"/>
+           </f:facet>
+            <h:outputText value="#{itemListencours.objet}"/>
+       </p:column> 
+    </div>
+    
+    
+      <div style="margin-top: 10px" class="ftitle">
+          <p:column filterBy="#{itemListencours.montantOctroye}" filterMatchMode="contains">
+           <f:facet name="header">
+              <h:outputText value="Montant"/>
+           </f:facet>
+              <h:outputText value="#{itemListencours.montantOctroye}"/>
+          </p:column> 
+      </div>
+      
+     <div style="margin-top: 10px" class="ftitle">
+         <p:column filterBy="#{itemListencours.mensualite}" filterMatchMode="contains">
+           <f:facet name="header">
+              <h:outputText value="Mensualité"/>
+           </f:facet>
+             <h:outputText value="#{itemListencours.mensualite}"/>
+          </p:column> 
+     </div>
+      
+      <div style="margin-top: 10px" class="ftitle">
+          <p:column filterBy="#{itemListencours.reste}" filterMatchMode="contains">
+           <f:facet name="header">
+              <h:outputText value="Reste à payer"/>
+           </f:facet>
+              <h:outputText value="#{itemListencours.reste}"/>
+          </p:column> 
+      </div>
+     </div>  
+     </p:dataTable> 
+    
+      <div class="boutondiv">
+        <p:commandButton  process="@this"  update="@form" actionListener="#{encoursMBean.rafraichir()}" value="Rafraichir" icon="ui-icon-refresh"/>
+      </div>
+      
+  </div>
+                    
+  </p:panel>                  
+    
+            </div> 
+       </center>
+        
+        <p:confirmDialog   styleClass="confirmDiaolog" message="etes-vous sure de vouloir effectuer la suppression?" closable="false" hideEffect="bounce"
+                           widgetVar="confirmSuppression" >
+            <div class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{encoursMBean.supprimer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:confirmDialog>
+        
+    <!--dialog de demande de confirmation d'enregistrement au cas ou il en faut-->
+
+        <p:dialog modal="true"  styleClass="confirmDiaolog" closable="flase" resizable="false" 
+                  widgetVar="confirmEnregistre" >
+            <p:outputLabel value="etes-vous sure de vouloir valider ces informations ?"/><br/>
+            <div  class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{encoursMBean.enregistrer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:dialog>    
+        
+  </h:form>  
+</ui:composition>

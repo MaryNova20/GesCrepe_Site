@@ -1,0 +1,93 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form>
+        <p:growl id="gl" showDetail="true" showSummary="true" />  
+        <center>
+            <br> </br>
+            <!--p style="alignment-adjust: central">RAD DU FORMULAIRE OBJET</p-->
+            <div >
+                <p:panel style="width: 800px" header="Gestion des objets">
+                    <p:fieldset toggleable="true" legend="edition">
+                        <h:panelGrid  columns="2">
+                            
+  <p:outputLabel  value="Objet du crédit:" for="libobjet" />
+  <p:inputText   id="libobjet" value="#{objetMBean.formObject.libObjet}" title="libobjet" required="true" requiredMessage="le libellé est requis."/>
+                                   
+  <p:outputLabel  value="Type du crédit:" for="type" />
+  <p:selectOneMenu converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" converterMessage="Conversion échouée" id="type" value="#{objetMBean.formObject.idType}" title="type" >
+                       <f:selectItem itemLabel="" itemValue=""/>
+                       <f:selectItems var="itemtype" value="#{objetMBean.dataListTypecredit}" itemValue="#{itemtype}" itemLabel="#{itemtype.nature}"/>
+</p:selectOneMenu>
+             
+</h:panelGrid>
+
+                    </p:fieldset>
+
+
+                    <div class="boutondiv">
+                        <p:commandButton  update="@form"  value="Valider" actionListener="#{objetMBean.enregistrer()}" icon="ui-icon-check"/>
+                        <p:commandButton disabled="#{objetMBean.desactiverBoutonSuppr}" update="@form" actionListener="#{objetMBean.confirmeSuppression()}" value="Supprimer" icon="ui-icon-trash"/>
+                        <p:commandButton value="Imprimer" icon="ui-icon-print"/>
+                    </div>
+                    <div style="margin-top: 10px" class="ftitle">
+                        <h:outputLabel value="Liste des objet"/>
+                    </div>
+                    <div >
+                        <p:dataTable paginatorPosition="top" paginatorAlwaysVisible="false" paginator="true" reflow="true" rows="5" id="dta" rowKey="#{itemListobjet.idObjet}" selectionMode="single" selection="#{objetMBean.selectedObject}" styleClass="datatable" value="#{objetMBean.dataList}" var="itemListobjet">
+                            <p:ajax event="rowDblselect" update="@form" listener="#{objetMBean.rowSelect()}"/>
+                          
+                            <p:column filterBy="#{itemListobjet.idType.nature}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="idtype"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListobjet.idType.nature}"/>
+                            </p:column>
+                            <p:column filterBy="#{itemListobjet.libObjet}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="Objet du crédit"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListobjet.libObjet}"/>
+                            </p:column>
+  <f:facet name="footer">
+                                <p:outputLabel  value="RAD(Rapid Application developpment) powered by MENSAH Y.O.D"/>
+                            </f:facet>
+                        </p:dataTable>
+                        <div class="boutondiv">
+                            <p:commandButton  process="@this"  update="@form" actionListener="#{objetMBean.rafraichir()}" value="Rafraichir" icon="ui-icon-refresh"/>
+
+                        </div>
+
+                    </div>
+
+                </p:panel>
+            </div>
+        </center>
+        <p:confirmDialog   styleClass="confirmDiaolog" message="etes-vous sure de vouloir effectuer la suppression?" closable="false" hideEffect="bounce"
+                           widgetVar="confirmSuppression" >
+            <div class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{objetMBean.supprimer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:confirmDialog>
+
+        <!--dialog de demande de confirmation d'enregistrement au cas ou il en faut-->
+
+        <p:dialog modal="true"  styleClass="confirmDiaolog" closable="flase" resizable="false" 
+                  widgetVar="confirmEnregistre" >
+            <p:outputLabel value="etes-vous sure de vouloir valider ces informations ?"/><br/>
+            <div  class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{objetMBean.enregistrer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:dialog>
+
+    </h:form>
+ </ui:composition>
+

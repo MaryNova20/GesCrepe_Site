@@ -1,0 +1,132 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form>
+        <p:growl id="gl" showDetail="true" showSummary="true" /> 
+        <div class="layout-portlets-box">
+            <div class="ui-grid-col-6">
+                <p:fieldset toggleable="true" legend="DECAISSEMENT DU PRET">
+                    <h:panelGrid columns="2">              
+                        <p:outputLabel value="Choix de la demande"/>
+                        <p:commandButton  process="@this" icon="ui-icon-search" action="#{demandeMBean.openDemande()}" /> 
+                        <p:outputLabel value="Montant à décaisser"/>
+                        <p:inputNumber readonly="true" symbol="FCFA" symbolPosition="suffix"  styleClass="inputMoyen"   id="montantcessible" value="#{decaissementMBean.formObject.montantDecaisse}" title="montant cessible" required="false" requiredMessage="Cette information est requise."/>
+                        <p:outputLabel for="dtDemande" value="Date de Mise en place :" />
+                        <p:calendar required="true"  pattern="dd/MM/yyyy" styleClass="inputDate" showOn="button" id='dtDemande' value="#{decaissementMBean.formObject.dateDecaissement}" 
+                                    effect="fold" mindate="#{decaissementMBean.mindate}" maxdate="#{decaissementMBean.maxdate}"  mask="99/99/9999" />
+                    </h:panelGrid>
+                    <div class="boutondiv">
+                        <p:commandButton  process="@this"  actionListener="#{decaissementMBean.confirmerEnregistrer()}"  value="Valider le décaissement" icon="ui-icon-disk"/>
+                    </div>
+                </p:fieldset>
+  <p:dataTable value="#{decaissementMBean.dataList}" var="item">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Employe"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idDemande.matricule.nom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="DateDecaissement"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateDecaissement}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="MontantDecaisse"/>
+                            </f:facet>
+                            <h:outputText value="#{item.montantDecaisse}"/>
+                        </p:column>
+                       
+                    </p:dataTable>
+         
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="ui-grid-col-6">
+
+                <p:panel styleClass="decaissement" style="height: 400px" header="INFORMATIONS RELATIVES A LA DEMANDE">
+
+
+
+                    <div class="ui-grid-col-6">
+                        <h:panelGrid columns="2" width="75%">
+                            <h:outputLabel value="Nom du personnel:"/> 
+                            <h:outputLabel value="#{decaissementMBean.seldemande.matricule.nom}"/> 
+                            <h:outputLabel value="prénoms:"/> 
+                            <h:outputLabel value="#{decaissementMBean.seldemande.matricule.prenom}"/>
+                            <h:outputLabel value="Poste occupé:"/> 
+                            <h:outputLabel value="#{decaissementMBean.seldemande.matricule.idPoste.libPoste}"/> 
+                            <h:outputLabel value="Salaire:"/> 
+                            <h:outputLabel value="#{decaissementMBean.seldemande.matricule.salaire}"/>
+                            <h:outputLabel value="Indice de la demande:"/> 
+                            <h:outputLabel value="#{decaissementMBean.seldemande.idDemande}"/>
+                        </h:panelGrid>
+
+                    </div>
+
+
+
+                    <div class="ui-grid-col-6">
+                        <h:panelGrid columns="2" width="75%">
+                            <h:outputLabel value="Objet demande:"/> 
+                            <h:outputLabel value="#{decaissementMBean.seldemande.idObjet.libObjet}"/> 
+                            <h:outputLabel value="Garantie"/> 
+                            <h:outputLabel value="#{decaissementMBean.seldemande.idGarantie.libGarantie}"/>
+                        </h:panelGrid>
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <h:panelGrid columns="2" width="75%">
+                            <h:outputLabel value="Montant Demande:"/> 
+                            <h:outputLabel style="color: red" value="#{decaissementMBean.seldemande.montantCessible}"/> 
+                            <h:outputLabel value="Quotité credit:"/> 
+                            <h:outputLabel style="color: red" value="#{decaissementMBean.seldemande.quotiteCessible} %"/>
+                        </h:panelGrid>
+                    </div>
+
+                    <div class="ui-grid-col-12">
+                        <h:panelGrid columns="2" width="75%">
+                            <h:outputLabel value="Date de la demande:"/> 
+                            <h:outputLabel value="#{decaissementMBean.seldemande.dateDemande}">
+                                <f:convertDateTime pattern="dd/MMMM/yyyy" timeZone="CET"/>
+                            </h:outputLabel>
+
+                        </h:panelGrid>
+                    </div>
+
+                </p:panel>
+
+
+            </div>
+
+        </div>      
+
+
+        <!--dialog de demande de confirmation d'enregistrement au cas ou il en faut-->
+
+        <p:dialog modal="true"  styleClass="confirmDiaolog" closable="flase" resizable="false" 
+                  widgetVar="confirmEnregistre" >
+            <p:outputLabel value="Êtes-vous sûr de vouloir valider ces informations ?"/><br/>
+            <div  class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{decaissementMBean.enregistrer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:dialog>
+
+    </h:form>  
+
+    <ui:include src="../dialogs/dialogRecherchDemande.xhtml"/>
+</ui:composition>

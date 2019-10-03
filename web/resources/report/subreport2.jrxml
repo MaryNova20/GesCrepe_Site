@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a34812b-5a61-4e38-b9e2-c9a3265505ce">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table_CH" mode="Opaque" backcolor="#CCCCCC" fill="Solid">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" fill="Solid">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="datenouvalidite" class="java.lang.String"/>
+	<parameter name="mtrachat" class="java.lang.String"/>
+	<parameter name="typecredit" class="java.lang.String"/>
+	<parameter name="mtdemande" class="java.lang.String"/>
+	<parameter name="mensualite" class="java.lang.String"/>
+	<parameter name="echeance" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="45">
+			<staticText>
+				<reportElement style="table_TD" x="0" y="0" width="209" height="45" uuid="2b5ade07-6ddd-470f-9e26-b9399535bfa8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[AVANCE SOLLICITEE]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="table_TD" x="285" y="0" width="151" height="45" uuid="7a877941-2085-4b02-a9af-5189f419fb82"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{mtrachat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="209" y="0" width="76" height="45" uuid="a0e5b28d-62f6-4e29-875b-67c424eaf005"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph rightIndent="5" spacingBefore="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{typecredit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="436" y="0" width="119" height="45" uuid="f7ff0994-6b43-498d-a659-efde8bb2c05d"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="82" splitType="Stretch">
+			<staticText>
+				<reportElement style="table_TD" x="0" y="0" width="209" height="41" uuid="21c879c8-ef2e-4a3f-9440-4dbf1eeb3aa5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[OBJET]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="209" y="0" width="76" height="41" uuid="50b44668-9b3c-4dc5-bf71-5bd18246d5e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[MONTANT CESSIBLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="285" y="0" width="72" height="41" uuid="0b5f9dd7-ec3e-4d98-a05d-040619cdef0a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[REMBOURSEMENT MENSUEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="357" y="0" width="119" height="41" uuid="e8f274cf-42a5-4cb1-b1a1-6f24f843c2ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[ECHEANCES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="476" y="0" width="79" height="41" uuid="26f7cf46-72a0-475d-bd21-13c4813553d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[VALIDITE]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="table_TD" x="476" y="41" width="79" height="41" uuid="1c7a8632-3d68-47e2-a4e5-0eee6547c3a1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{datenouvalidite}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" stretchType="RelativeToBandHeight" x="209" y="41" width="76" height="41" uuid="db50bcaf-ddca-4d9c-82ce-f75a463c38c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph rightIndent="5" spacingBefore="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mtdemande}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="285" y="41" width="72" height="41" uuid="0e3df406-1e66-47f5-8d36-dfc4761530ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph rightIndent="5" spacingBefore="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mensualite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="357" y="41" width="119" height="41" uuid="6edc4394-dbef-4878-ba0c-d3be124e735e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph rightIndent="5" spacingBefore="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{echeance}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="41" width="209" height="41" uuid="3b9cac2e-3790-4f53-b7b7-031f9db7f8ae"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

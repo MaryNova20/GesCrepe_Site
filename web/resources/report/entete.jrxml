@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="entete" language="groovy" pageWidth="802" pageHeight="95" whenNoDataType="AllSectionsNoDetail" columnWidth="798" leftMargin="2" rightMargin="2" topMargin="2" bottomMargin="2" uuid="32c61db9-1f05-4d81-b14f-5ef779f9c1ed">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="para_logo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="58" width="122" height="20" uuid="041088ac-cee8-41d1-92e2-87a692c1f27e"/>
+				<text><![CDATA[Groupe Attijariwafa bank]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="4" y="0" width="112" height="58" uuid="448707a3-545b-4874-b7a3-7a5a3aa89f37"/>
+				<imageExpression><![CDATA[$P{para_logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+</jasperReport>

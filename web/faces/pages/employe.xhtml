@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../WEB-INF/template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:bnu="http://bootsfaces.net/ui">
+
+    <ui:define name="content">
+        <h:form>
+            <p:growl id="growlemploye"  showDetail="true" showSummary="false" autoUpdate="true" life="2000" />
+
+            <p:panel header="GESTION DES UTILISATEURS" styleClass="paneE">
+                <table>
+                    <tr>
+                        <td valign="top">
+                            <p:panel style="height: 350px" id="edition" header="EDITION" styleClass="panel" >
+
+                                <h:panelGrid columns="2" cellpadding="1" cellspacing="7" >
+                                    <p:outputLabel for="nomproducteur" value="Nom:" />
+                                    <p:inputText  required="true" requiredMessage="veuillez renseigner le nom" id="nomproducteur" 
+                                                  value="#{employeManagedBean.formUtilisateurs.nomuser}" title="Nom" >
+                                        <f:validateRegex pattern="[a-zA-Z-]*" />
+                                    </p:inputText>
+                                    <p:outputLabel for="userLogin" value="Login:"  />
+                                    <p:inputText required="true"  id="userLogin" value="#{employeManagedBean.formUtilisateurs.loginuser}" title="UserLogin" requiredMessage="The UserLogin field is required."/>
+
+
+                                    <p:outputLabel for="profuser" value="Profil:"  />
+                                    <p:selectOneMenu id="profuser" required="true" requiredMessage="veuillez renseigner le profil" value="#{employeManagedBean.formUtilisateurs.profilId}"
+                                                     var="profil" style=";margin-top: 4px"
+                                                     converter="omnifaces.SelectItemsConverter" filter="true" 
+                                                     filterMatchMode="contains" converterMessage="Conversion echoué">
+                                        <f:selectItem itemLabel="..choisir profil.." itemValue="" />
+                                        <f:selectItems value="#{employeManagedBean.dataListProfil}" 
+                                                       var="itemp" itemLabel="#{itemp.profilDesc}" itemValue="#{itemp}"/>
+                                        <p:column>
+                                            <h:outputText value="#{profil.profilDesc}"/>
+                                        </p:column>
+
+                                    </p:selectOneMenu>
+
+                                </h:panelGrid>
+                                <div class="boutondiv" style="margin-top: 10px">
+                                    <p:commandButton process="@this" value="Nouveau" update="@form"
+                                                     actionListener="#{employeManagedBean.effacer()}" 
+                                                     icon="ui-icon-plus"/>
+                                    <p:commandButton process="@this" update="@form" 
+                                                     actionListener="#{employeManagedBean.reinitialiser()}"  
+                                                     value="reinitialiser" icon="ui-icon-refresh" 
+                                                     disabled="#{employeManagedBean.desactiversuppr}"/>
+                                    <p:commandButton value="valider" update="@form" 
+                                                     actionListener="#{employeManagedBean.enregistrer()}"
+                                                     icon="ui-icon-check"/>
+
+                                </div>
+                            </p:panel> 
+                        </td>
+                        <td valign="top">
+                            <p:panel style="height: 420px" header="Liste des utilisateurs">
+                                <p:dataTable id="grid" value="#{employeManagedBean.dataListUtilisateurs}"
+                                             var="item" rowKey="#{item.iduser}" selectionMode="single" 
+                                             selection="#{employeManagedBean.selectedUtilisateurs}"  rows="10"
+                                             editable="true"
+                                             emptyMessage="Auncu utilisateur enregistré"
+                                             scrollable="true" scrollHeight="290">
+                                    <p:ajax update="@form" event="rowSelect" listener="#{employeManagedBean.rowSelected()}" />
+
+                                    <p:column headerText="Nom" filterBy="#{item.nomuser}" filterMatchMode="contains"
+                                              footerText="#{employeManagedBean.dataListUtilisateurs.size()}"    >
+
+                                        <p:outputLabel  value="#{item.nomuser}"/>
+                                    </p:column>
+                                    <p:column headerText="Login"
+                                              filterBy="#{item.loginuser}" filterMatchMode="contains"
+                                              >
+
+                                        <p:outputLabel value="#{item.loginuser}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+                            </p:panel>
+
+                        </td>
+                    </tr>
+                </table>
+
+            </p:panel>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,101 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form>
+        <p:growl id="gl" showDetail="true" showSummary="true" />  
+        <center>
+            <br> </br>
+            <!--p style="alignment-adjust: central">RAD DU FORMULAIRE DECAISSEMENT</p-->
+            <div >
+                <p:panel style="width: 800px" header="Gestion des decaissements">
+                    <p:fieldset toggleable="true" legend="edition">
+                        <h:panelGrid  columns="2">
+                      
+  <p:outputLabel  value="Indice de la demande:" for="iddemande" />
+  <p:selectOneMenu converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" converterMessage="Conversion echoue" id="iddemande" value="#{decaissementMBean.formObject.idDemande}" title="iddemande" >
+                       <f:selectItem itemLabel="" itemValue=""/>
+                       <f:selectItems var="itemiddemande" value="#{decaissementMBean.dataListDemande}" itemValue="#{itemiddemande}" itemLabel="#{itemiddemande.idDemande}"/>
+</p:selectOneMenu>
+  <p:outputLabel  value="Date de décaissement:" for="datedecaissement" />
+  <p:calendar  showOn="button" id="datedecaissement" value="#{decaissementMBean.formObject.dateDecaissement}" title="datedecaissement" required="true" requiredMessage="le date est requise."/>
+                          
+  <p:outputLabel  value="Montant décaissé:" for="montantdecaisse" />
+  <p:inputText   id="montantdecaisse" value="#{decaissementMBean.formObject.montantDecaisse}" title="montantdecaisse" required="true" requiredMessage="le montant est requis(e)."/>
+                          
+</h:panelGrid>
+
+                    </p:fieldset>
+
+
+                    <div class="boutondiv">
+                        <p:commandButton  update="@form"  value="Valider" actionListener="#{decaissementMBean.enregistrer()}" icon="ui-icon-check"/>
+                        <p:commandButton disabled="#{decaissementMBean.desactiverBoutonSuppr}" update="@form" actionListener="#{decaissementMBean.confirmeSuppression()}" value="Supprimer" icon="ui-icon-trash"/>
+                        <p:commandButton value="Imprimer" icon="ui-icon-print"/>
+                    </div>
+                    <div style="margin-top: 10px" class="ftitle">
+                        <h:outputLabel value="Liste des decaissement"/>
+                    </div>
+                    <div >
+                        <p:dataTable paginatorPosition="top" paginatorAlwaysVisible="false" paginator="true" reflow="true" rows="5" id="dta" rowKey="#{itemListdecaissement.idDecaissement}" selectionMode="single" selection="#{decaissementMBean.selectedObject}" styleClass="datatable" value="#{decaissementMBean.dataList}" var="itemListdecaissement">
+                            <p:ajax event="rowDblselect" update="@form" listener="#{decaissementMBean.rowSelect()}"/>
+                          
+                            <p:column filterBy="#{itemListdecaissement.idDemande}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="indice demande"/>
+                                </f:facet>
+                                    <h:outputText value="#{itemListdecaissement.idDemande}"/>
+                            </p:column>
+                            <p:column filterBy="#{itemListdecaissement.dateDecaissement}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="date décaissement"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListdecaissement.dateDecaissement}"/>
+                            </p:column>
+                            <p:column filterBy="#{itemListdecaissement.montantDecaisse}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="montant décaissé"/>
+                                </f:facet>
+                                <h:outputText value="#{itemListdecaissement.montantDecaisse}"/>
+                            </p:column>
+  <f:facet name="footer">
+                                <p:outputLabel  value="RAD(Rapid Application developpment) powered by MENSAH Y.O.D"/>
+                            </f:facet>
+                        </p:dataTable>
+                        <div class="boutondiv">
+                            <p:commandButton  process="@this"  update="@form" actionListener="#{decaissementMBean.rafraichir()}" value="Rafraichir" icon="ui-icon-refresh"/>
+
+                        </div>
+
+                    </div>
+
+                </p:panel>
+            </div>
+        </center>
+        <p:confirmDialog   styleClass="confirmDiaolog" message="etes-vous sure de vouloir effectuer la suppression?" closable="false" hideEffect="bounce"
+                           widgetVar="confirmSuppression" >
+            <div class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{decaissementMBean.supprimer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmSuppression').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:confirmDialog>
+
+        <!--dialog de demande de confirmation d'enregistrement au cas ou il en faut-->
+
+        <p:dialog modal="true"  styleClass="confirmDiaolog" closable="flase" resizable="false" 
+                  widgetVar="confirmEnregistre" >
+            <p:outputLabel value="etes-vous sure de vouloir valider ces informations ?"/><br/>
+            <div  class="boutondiv">
+                <p:commandButton value="Oui" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check fa fa-check Fs14 white"
+                                 action="#{decaissementMBean.enregistrer()}"  update="@form"/>
+                <p:commandButton value="Non" onclick="PF('confirmEnregistre').hide();"  styleClass="ui-confirmdialog-no" icon="ui-icon-close fa fa-close Fs14 white"
+                                 style="margin-left: 5px;size: 90px;"/>
+            </div>
+        </p:dialog>
+
+    </h:form>
+ </ui:composition>
+

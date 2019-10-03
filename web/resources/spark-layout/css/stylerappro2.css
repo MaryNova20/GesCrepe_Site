@@ -1,0 +1,98 @@
+
+/* 
+    Document   : style
+    Created on : 15 janv. 2015, 08:15:40
+    Author     : MENSAH Y.O.D
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.ui-selectonemenu{
+    width:210px !important;
+
+}
+.ui-selectonemenu-list-item, .ui-autocomplete-list-item ,.ui-selectonemenu-item td{
+    height: 8px;
+    font-size: 12px !important;
+}
+.ui-widget{
+    font-size:17px;
+}
+a{
+    text-decoration: none;
+}
+
+.ui-button {
+    font-size: 14px;
+}
+
+.boutondiv{
+    text-align: right;
+    padding: 5px;
+    padding-bottom: 1px;
+    padding-top: 1px;
+    border-radius: 6px;
+    margin-top: 2px;
+    background-color: #cecfcf;
+    font-size: 11px;
+
+}
+.ui-inputfield{
+    font-size: 12px !important;
+    height:23px;
+    box-shadow:0px 2px 4px #EAEAEA inset !important;
+}
+.inputDate .ui-inputfield{
+    width: 80px!important;
+}
+.inputBtntSearch{
+    width: 25px;
+}
+
+.inputMoyen , .inputMoyen .ui-autocomplete-input, .inputMoyen .ui-inputtext{
+    width: 120px !important;   
+}
+.inputGrandMoyen , .inputGrandMoyen .ui-autocomplete-input, .inputGrandMoyen .ui-inputtext{
+    width: 220px !important;   
+}
+
+.inputPetit, .inputPetit .ui-autocomplete-input, .inputPetit .ui-inputtext{
+    width: 80px !important;  
+}
+
+.inputPetitCat, .inputPetitCat .ui-autocomplete-input, .inputPetitCat .ui-inputtext{
+    width: 140px !important;  
+}
+.input25px, .input25px .ui-autocomplete-input, .input25px .ui-inputtext{
+    width: 25px !important;  
+}
+.input35px, .input35px .ui-autocomplete-input, .input35px .ui-inputtext{
+    width: 35px !important;  
+}
+
+.inputDate .ui-inputfield{
+    width: 80px!important;
+}
+
+.button-autocomplete{
+    margin-left: 30px !important;
+}
+
+.ui-accordion-content{
+    background-color: #E6F2FF !important;
+    padding: 2px !important;
+    margin-top: 2px;
+    border: none !important;
+}
+.ftitle{
+    text-align: left;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px;
+    text-shadow: 0px -1px 0px rgb(17, 124, 192);
+    margin-bottom: 10px;
+    border-radius: 3px;
+    background-color: #CCC;
+
+}
+

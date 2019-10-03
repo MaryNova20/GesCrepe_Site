@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <p:dialog modal="true"   width="900" height="400" dynamic="true"
+              resizable="false" widgetVar="dlgRecherchpersonnel"
+              header="Choix de personnel" position="top" styleClass="info"
+              >
+        <h:form>
+            <p:dataTable paginatorPosition="top" paginatorAlwaysVisible="false" paginator="true"
+                         reflow="true" rows="15"  rowKey="#{itemListemploye.matricule}" 
+                         selectionMode="single" selection="#{demandeMBean.selemploye}" 
+                         scrollHeight="300" scrollable="true"
+                         styleClass="datatable" value="#{demandeMBean.dataListEmploye}" var="itemListemploye">
+                <p:ajax event="rowDblselect" 
+                        update="@(.info)" listener="#{demandeMBean.rowSelect()}"/>
+
+                <p:column filterBy="#{itemListemploye.matricule}" filterMatchMode="contains">
+                    <f:facet name="header">
+                        <h:outputText value="Matricule"/>
+                    </f:facet>
+                    <h:outputText value="#{itemListemploye.matricule}"/>
+                </p:column>
+                <p:column filterBy="#{itemListemploye.matricule}" filterMatchMode="contains">
+                    <f:facet name="header">
+                        <h:outputText value="Indice"/>
+                    </f:facet>
+                    <h:outputText value="#{itemListemploye.indice}"/>
+                </p:column>
+                <p:column filterBy="#{itemListemploye.nom}" filterMatchMode="contains">
+                    <f:facet name="header">
+                        <h:outputText value="Nom"/>
+                    </f:facet>
+                    <h:outputText value="#{itemListemploye.nom}"/>
+                </p:column>
+                <p:column filterBy="#{itemListemploye.prenom}" filterMatchMode="contains">
+                    <f:facet name="header">
+                        <h:outputText value="Prénoms"/>
+                    </f:facet>
+                    <h:outputText value="#{itemListemploye.prenom}"/>
+                </p:column>
+                <p:column filterBy="#{itemListemploye.idPoste.libPoste}" filterMatchMode="contains">
+                    <f:facet name="header">
+                        <h:outputText value="Poste"/>
+                    </f:facet>
+                    <h:outputText value="#{itemListemploye.idPoste.libPoste}"/>
+                </p:column>
+                <p:column filterBy="#{itemListemploye.salaire}" filterMatchMode="contains">
+                    <f:facet name="header">
+                        <h:outputText value="Salaire"/>
+                    </f:facet>
+                    <h:outputText value="#{itemListemploye.salaire}"/>
+                </p:column>
+                <p:column filterBy="#{itemListemploye.dateEmb}" filterMatchMode="contains">
+                    <f:facet name="header">
+                        <h:outputText value="DateEmb"/>
+                    </f:facet>
+                    <h:outputText value="#{itemListemploye.dateEmb}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET"/>
+                    </h:outputText>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+    </p:dialog>
+
+
+</ui:composition>

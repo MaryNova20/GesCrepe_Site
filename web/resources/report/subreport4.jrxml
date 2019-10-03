@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport4" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7178b4be-83f4-40b5-87e3-740267c7676c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nomprenom" class="java.lang.String"/>
+	<parameter name="poste" class="java.lang.String"/>
+	<parameter name="commentaire" class="java.lang.String"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="encours" class="java.lang.String"/>
+	<field name="mensualite" class="java.lang.String"/>
+	<variable name="mensualite_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{mensualite}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="88" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="144" height="30" uuid="98fbb25e-4b69-4073-bdd3-ca9ef128991a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Objet et Apréciation:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="75" height="20" uuid="d4656e9b-22da-4dcb-9c9c-2872537ba88b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[M / Mme]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="75" y="30" width="126" height="20" uuid="95da35b0-229f-4404-943d-59bfa3d3e174"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{nomprenom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="201" y="30" width="26" height="20" uuid="8a7dc581-6e0d-4bfc-9200-aa3c6d21d279"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[est]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="227" y="30" width="132" height="20" uuid="4b0e846f-2974-458b-9baa-f31325f8f640"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{poste}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="359" y="30" width="196" height="20" uuid="273f365f-756f-45b4-9ea4-b1b7a0194022"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[dans notre institution. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="50" width="365" height="20" uuid="49198e99-ac28-4044-ae87-0ddafb0f2888"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[La situation de ses engagements dans nos livres se présentent comme suit:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="201" height="36" uuid="7898013a-6ec8-4c44-9013-b36ea3d7c2ab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="0" width="174" height="36" uuid="139fa0c5-e914-48f6-9f20-cde42c6b2a93"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[encours]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="0" width="180" height="36" uuid="95a185d6-de19-4042-b5a4-6f63e1b26a48"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[mensualite]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="90" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="201" height="36" uuid="f776383a-4076-48a8-b81f-7a8e665014ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="0" width="174" height="36" uuid="e1c1ceed-3caf-4ade-b83a-03cb1d5ac6a3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{encours}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="0" width="180" height="36" uuid="7452318b-a614-4afb-b537-5377ad3b6a5f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{mensualite}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="97" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="18" width="555" height="78" uuid="f93fda01-7b71-4018-a18a-e049b14fe1f3"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="79" uuid="e7513eed-2a56-4628-bbe6-5c221fd4db6f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{commentaire}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<lastPageFooter>
+		<band height="68">
+			<staticText>
+				<reportElement x="120" y="27" width="339" height="28" uuid="b1db2ab2-3319-4340-9830-b5e413b2765e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPARTEMENT DES RESSOURCES HUMAINES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="0" width="158" height="27" uuid="bba22dd3-5beb-469b-b169-0fd2576814c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECTION GENERALE]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

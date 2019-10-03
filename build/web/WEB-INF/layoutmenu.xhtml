@@ -1,0 +1,54 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ps="http://primefaces.org/spark"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    <h:form>
+        <ps:menu>  
+
+            <f:facet name="options">
+                <p:commandButton type="button" icon="fa fa-search Fs18 white" styleClass="Fright"/>
+                <p:inputText placeholder="Search" styleClass="Fright"/>    
+            </f:facet>
+            <p:submenu rendered="#{loginManagedBean.menuadministrationGriser}" label="ADMINISTRATION"  icon="fa fa-gear">
+                <p:menuitem ajax="false" rendered="#{loginManagedBean.userEditGriser}"  action="#{loginManagedBean.checkdeconnexionuser()}" value="Users" />
+                <p:menuitem ajax="false" rendered="#{loginManagedBean.userEditGriser}"  action="#{loginManagedBean.checkdeconnexionprofil()}" value="Profil" />
+                <p:menuitem ajax="false" rendered="#{loginManagedBean.menuEditGriser}" action="#{loginManagedBean.checkdeconnexionmenu()}" value="Menus" />
+                <p:menuitem  ajax="false" rendered="#{loginManagedBean.habilitationEditGriser}" action="#{loginManagedBean.checkdeconnexiondroit()}" value="habilitations" />
+                <p:menuitem ajax="false" rendered="#{loginManagedBean.syslogEditGriser}"  action="#{loginManagedBean.checkdeconnexionsyslog()}" value="Syslog" />
+            </p:submenu>
+            
+            <p:separator rendered="#{loginManagedBean.menuadministrationGriser}"/>
+            <p:submenu label="DONNEES BASE" icon="fa fa-cart">
+                <p:menuitem ajax="false" value="Garantie" action="#{loginManagedBean.garantie()}"  />
+                <p:menuitem ajax="false"  value="Objet crédit" action="#{loginManagedBean.objetCredit()}" />
+                <p:menuitem ajax="false" value="Type crédit" action="#{loginManagedBean.typeCredit()}"  />
+            </p:submenu>
+           
+            <p:separator />
+            <p:submenu label="DEMANDES" icon="fa fa-cart">
+                <p:menuitem ajax="false"  value="Nouvelle Demande" action="#{loginManagedBean.newdemande()}" />
+                <p:menuitem ajax="false" value="Mise à jour des demandes" action="#{loginManagedBean.misajourDemande()}"  />
+            </p:submenu>
+
+            <p:separator />   
+            <p:submenu label="SUIVI DES DEMANDES" >
+                <p:menuitem ajax="false"  value="Situation des demandes" action="#{loginManagedBean.situationdemande()}" />
+                <p:menuitem  ajax="false" value="Décaissement des prêts" action="#{loginManagedBean.newdecaissement()}"  />
+            </p:submenu>
+            <p:separator />
+            <p:submenu label="EDITION ETATS" >
+                <p:menuitem ajax="false" value="Approbation systématique" action="#{loginManagedBean.aprosystematiq()}"/>
+                <p:menuitem ajax="false"  value="Demandes en comité" action="#{loginManagedBean.demandecomite()}" />
+                <p:menuitem ajax="false" value="Situation des décaissements" action="#{loginManagedBean.situationdecaissement()}"/>
+                <p:menuitem ajax="false" value="Fiche de comité" action="#{loginManagedBean.ficheComite()}" />
+            </p:submenu>
+        
+            
+            
+        </ps:menu>
+    </h:form>
+
+</ui:composition>
